@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 
-public class InGameGUI : MonoBehaviour {
+public class GameHUD : MonoBehaviour {
 
     public Text scoreText;
     public Text livesText;
