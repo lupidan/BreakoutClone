@@ -12,7 +12,7 @@ public class GameControlComponent : MonoBehaviour, GameControl {
         ResetScore();
     }
 
-    void GameControl.AddScore(int score)
+    public void AddScore(int score)
     {
         if (score > 0)
         {
@@ -24,6 +24,9 @@ public class GameControlComponent : MonoBehaviour, GameControl {
     public void ResetScore()
     {
         Score = 0;
-        OnScoreChanged(this);
+        if (OnScoreChanged != null)
+        {
+            OnScoreChanged(this);
+        }
     }
 }
