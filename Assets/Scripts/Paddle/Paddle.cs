@@ -3,7 +3,7 @@ using System.Collections;
 
 public class Paddle : MonoBehaviour {
 
-    public float horizontalSpeed = 1.0f;
+    public Rect moveArea = new Rect(-5.0f, -5.0f, 10.0f, 10.0f);
     public PlayerInput playerInput = new KeyboardPlayerInput(7.0f);
     private Rigidbody2D rigidbody2D = null;
     
@@ -17,7 +17,7 @@ public class Paddle : MonoBehaviour {
         {
             Vector3 newPosition = transform.position;
             newPosition.x = playerInput.UpdateHorizontalPosition(transform.position.x);
-            transform.position = newPosition;
+            transform.position = moveArea.ClampPosition(newPosition);
         }
 	}
 }
