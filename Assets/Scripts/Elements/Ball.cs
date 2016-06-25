@@ -1,8 +1,8 @@
 ﻿using UnityEngine;
-using System.Collections;
-using System;
 
-public class BallComponent : MonoBehaviour, Ball {
+public delegate void BallEvent(Ball ball);
+
+public class Ball : MonoBehaviour {
 
     public static string Tag = "Ball";
 
@@ -31,9 +31,10 @@ public class BallComponent : MonoBehaviour, Ball {
 
     void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.tag == BlockComponent.Tag)
+        if (collision.gameObject.tag == Block.Tag)
         {
-            DestroyObject(collision.gameObject);
+            Block block = collision.gameObject.GetComponent<Block>();
+            Toolbox.GameObjectController.DestroyBlock(block);
         }
     }
 

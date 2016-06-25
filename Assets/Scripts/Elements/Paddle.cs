@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class PaddleComponent : MonoBehaviour, Paddle {
+public class Paddle: MonoBehaviour {
 
     public float launchSpeed = 10.0f;
     public PlayerInput playerInput = new KeyboardPlayerInput(7.0f);
@@ -23,7 +23,7 @@ public class PaddleComponent : MonoBehaviour, Paddle {
 
     void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.tag == BallComponent.Tag)
+        if (collision.gameObject.tag == Ball.Tag)
         {
             Rigidbody2D rigidBody2D = collision.gameObject.GetComponent<Rigidbody2D>();
             if (rigidBody2D != null)

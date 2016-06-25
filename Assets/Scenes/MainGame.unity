@@ -575,6 +575,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2cf5b555a06b38f4682a08801cb878ad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ballPrefab: {fileID: 191454, guid: f758cceabbc31714cabb495c78abe3d3, type: 2}
+  paddlePrefab: {fileID: 108420, guid: 9bf48141e23ae614cb82360116a8175a, type: 2}
+  blockSize: {x: 0.64, y: 0.32}
   blockPrefabs:
   - charID: 66
     blockPrefab: {fileID: 170360, guid: 02ea0b294a722244993a49fb290281fc, type: 2}
@@ -586,14 +589,6 @@ MonoBehaviour:
     blockPrefab: {fileID: 178860, guid: 2310a709299df3a4a8134fb61ac456de, type: 2}
   - charID: 89
     blockPrefab: {fileID: 167716, guid: 79f81137fa8c8cc4891dee64c026321c, type: 2}
-  ballPrefab: {fileID: 191454, guid: f758cceabbc31714cabb495c78abe3d3, type: 2}
-  paddlePrefab: {fileID: 108420, guid: 9bf48141e23ae614cb82360116a8175a, type: 2}
-  blockPrefab: {fileID: 170360, guid: 02ea0b294a722244993a49fb290281fc, type: 2}
-  ball: {fileID: 0}
-  paddle: {fileID: 0}
-  blockContainer: {fileID: 0}
-  blocks:
-  - {fileID: 0}
 --- !u!114 &1960669815
 MonoBehaviour:
   m_ObjectHideFlags: 0
