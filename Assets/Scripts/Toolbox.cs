@@ -16,8 +16,10 @@ public class Toolbox : MonoBehaviour {
         }
     }
 
-    public static GameControl GameControl { get { return Instance.gameControl; } }
+    public static GameController GameController { get { return Instance.gameController; } }
+    public static GameObjectController GameObjectController { get { return Instance.gameObjectController; } }
 
-    public GameControl gameControl = null;
-	
+    public GameController gameController = null;
+    public GameObjectController gameObjectController = null;
+
 }
