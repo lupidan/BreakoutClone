@@ -1,7 +1,7 @@
-﻿using UnityEngine;
+﻿public delegate void BlockEvent(Block block);
 
-public class Block : MonoBehaviour {
-
-    public static string Tag = "Block";
-
+public interface Block
+{
+    int AddedScore { get; }
+    event BlockEvent OnBlockDestroyed;
 }

@@ -1,15 +1,11 @@
-﻿using UnityEngine;
-using System.Collections;
+﻿
+public delegate void GameControlEvent(GameControl gameControl);
 
-public class GameControl : MonoBehaviour {
+public interface GameControl {
 
-	// Use this for initialization
-	void Start () {
-	
-	}
-	
-	// Update is called once per frame
-	void Update () {
-	
-	}
+    event GameControlEvent OnScoreChanged;
+
+    void AddScore(int score);
+    void ResetScore();
+    
 }
