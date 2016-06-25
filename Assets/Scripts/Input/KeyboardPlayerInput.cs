@@ -2,17 +2,17 @@
 
 public class KeyboardPlayerInput : PlayerInput {
 
-    public float HorizontalSpeed = 7.0f;
+    public float horizontalSpeed = 7.0f;
 
     public KeyboardPlayerInput(float horizontalSpeed)
     {
-        this.HorizontalSpeed = horizontalSpeed;
+        this.horizontalSpeed = horizontalSpeed;
     }
 
     public float UpdateHorizontalPosition(float currentHorizontalPosition)
     {
         float horizontalAxisMovement = Input.GetAxis("Horizontal");
-        return currentHorizontalPosition + (HorizontalSpeed * horizontalAxisMovement * Time.deltaTime);
+        return currentHorizontalPosition + (horizontalSpeed * horizontalAxisMovement * Time.deltaTime);
     }
 
     public bool ActionButton
