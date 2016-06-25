@@ -16,4 +16,12 @@ public class Ball : MonoBehaviour {
     {
         rigidbody2D.velocity = new Vector2(5.0f, 5.0f);
     }
+
+    void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.tag == Block.Tag)
+        {
+            DestroyObject(collision.gameObject);
+        }
+    }
 }
