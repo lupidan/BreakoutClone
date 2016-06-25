@@ -16,7 +16,7 @@ public class GameController : MonoBehaviour {
     public event GameControlEvent OnGameContinue;
 
     void Start () {
-        ResetScore();
+        StartGame();
     }
 
     public void AddScore(int score)
@@ -57,6 +57,10 @@ public class GameController : MonoBehaviour {
 
     public void StartGame()
     {
+        Toolbox.GameObjectController.CreateGame();
+        ResetScore();
+        ResetLives();
+
         if (OnGameStart != null)
         {
             OnGameStart(this);
