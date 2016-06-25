@@ -18,9 +18,8 @@ public class Paddle : MonoBehaviour {
 
     void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.tag == "Ball")
+        if (collision.gameObject.tag == Ball.Tag)
         {
-
             Rigidbody2D rigidBody2D = collision.gameObject.GetComponent<Rigidbody2D>();
             if (rigidBody2D != null)
             {
