@@ -24,7 +24,10 @@ public class GameController : MonoBehaviour {
         if (score > 0)
         {
             Score += score;
-            OnScoreChanged(this);
+            if (OnScoreChanged != null)
+            {
+                OnScoreChanged(this);
+            }
         }
     }
 

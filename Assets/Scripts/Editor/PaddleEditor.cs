@@ -8,6 +8,6 @@ public class NewBehaviourScript : Editor
     static void DrawPlayArea(Paddle paddle, GizmoType gizmoType)
     {
         Gizmos.color = Color.red;
-        paddle.MoveArea.DrawGizmo();
+        paddle.moveArea.DrawGizmo();
     }
 }

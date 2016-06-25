@@ -1,15 +1,15 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 public delegate void BlockEvent(Block block);
 
-public class Block : MonoBehaviour {
+public class Block : MonoBehaviour, PoolableComponent {
 
     public static string Tag = "Block";
 
     public SpriteRenderer spriteRenderer { get; private set; }
     public int addedScore = 100;
 
-    public int AddedScore { get {  return addedScore; } }
     public event BlockEvent OnBlockDestroyed;
 
     void Awake()
@@ -17,7 +17,12 @@ public class Block : MonoBehaviour {
         this.spriteRenderer = GetComponent<SpriteRenderer>();
     }
 
-    void OnDestroy()
+    public void OnSpawn()
+    {
+        OnBlockDestroyed = null;
+    }
+
+    public void OnDespawn()
     {
         if (OnBlockDestroyed != null)
         {

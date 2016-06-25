@@ -101,7 +101,6 @@ public class GameObjectPool {
         gameObject.SetActive(true);
         gameObject.name = pooledPrefab.name;
         gameObject.transform.parent = null;
-
         spawnedObjects.Add(gameObject);
 
         PoolableComponent[] pooledObjectComponents = gameObject.GetComponents<PoolableComponent>();
@@ -119,17 +118,16 @@ public class GameObjectPool {
     /// <param name="gameObject">The GameObject to recycle.</param>
     public void RecycleObject(GameObject gameObject)
     {
-        pooledObjects.Enqueue(gameObject);
-        gameObject.SetActive(false);
-
-        spawnedObjects.Remove(gameObject);
-
         PoolableComponent[] pooledObjectComponents = gameObject.GetComponents<PoolableComponent>();
         for (int i = 0; i < pooledObjectComponents.Length; i++)
         {
             PoolableComponent pooledObjectComponent = pooledObjectComponents[i];
             pooledObjectComponent.OnDespawn();
         }
+
+        spawnedObjects.Remove(gameObject);
+        gameObject.SetActive(false);
+        pooledObjects.Enqueue(gameObject);
     }
 
     /// <summary>

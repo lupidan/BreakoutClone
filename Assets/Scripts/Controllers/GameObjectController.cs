@@ -31,8 +31,8 @@ public class GameObjectController: MonoBehaviour
 
     public void CreateGame()
     {
-        CreateBall(new Vector3(0.0f, 0.0f, 0.0f));
         CreatePaddle(new Vector3(0.0f, -4.5f, 0.0f));
+        CreateBall();
         blockContainer = new GameObject("Blocks");
         blockContainer.transform.position = new Vector3(0.0f, 3.0f, 0.0f);
         blocks = new List<Block>();
@@ -41,11 +41,12 @@ public class GameObjectController: MonoBehaviour
         CreateBlockMatrix(patterns);
     }
 
-    
-
-    public Ball CreateBall(Vector3 position)
+    public Ball CreateBall()
     {
-        ball = CreateObjectFromPrefab<Ball>(ballPrefab, position);
+        ball = CreateObjectFromPrefab<Ball>(ballPrefab, Vector3.zero);
+        ball.transform.parent = paddle.transform;
+        ball.transform.localPosition = new Vector3(0.0f, 1.0f, 0.0f);
+        ball.OnBallDestroyed += BallWasDestroyed;
         return ball;
     }
 
@@ -138,9 +139,21 @@ public class GameObjectController: MonoBehaviour
             {
                 block.transform.parent = blockContainer.transform;
                 block.transform.localPosition = new Vector3(localXPos, localYPos, 0.0f);
+
+                block.OnBlockDestroyed += BlockWasDestroyed;
             }
             localXPos += blockSize.x;
         }
     }
 
+    private void BlockWasDestroyed(Block block)
+    {
+        Toolbox.GameController.AddScore(block.addedScore);
+    }
+
+    private void BallWasDestroyed(Ball ball)
+    {
+        Toolbox.GameController.SubstractLife();
+        CreateBall();
+    }
 }
