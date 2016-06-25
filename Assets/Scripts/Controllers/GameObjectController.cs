@@ -16,6 +16,7 @@ public class GameObjectController: MonoBehaviour
     public Vector2 blockSize = new Vector2(0.64f, 0.32f);
     public BlockPrefabEntry[] blockPrefabs;
     private Dictionary<char, GameObject> blockPrefabMap;
+    private GameObjectPoolManager poolManager;
 
     public Ball ball { get; private set; }
     public Paddle paddle { get; private set; }
@@ -25,6 +26,7 @@ public class GameObjectController: MonoBehaviour
     void Awake()
     {
         SetupBlockPrefabMap();
+        poolManager = new GameObjectPoolManager();
     }
 
     public void CreateGame()
@@ -52,7 +54,7 @@ public class GameObjectController: MonoBehaviour
         if (this.ball == ball)
         {
             this.ball = null;
-            GameObject.Destroy(ball.gameObject);
+            DestroyGameObject(ball.gameObject);
         }
     }
 
@@ -67,7 +69,7 @@ public class GameObjectController: MonoBehaviour
         if (this.paddle == paddle)
         {
             this.paddle = null;
-            GameObject.Destroy(paddle.gameObject);
+            DestroyGameObject(paddle.gameObject);
         }
     }
 
@@ -87,15 +89,21 @@ public class GameObjectController: MonoBehaviour
     {
         if (blocks.Contains(block))
         {
+            block.transform.parent = null;
             blocks.Remove(block);
-            GameObject.Destroy(block.gameObject);
+            DestroyGameObject(block.gameObject);
         }
     }
 
-    public T CreateObjectFromPrefab<T>(GameObject prefab, Vector3 position)
+    private T CreateObjectFromPrefab<T>(GameObject prefab, Vector3 position)
     {
-        GameObject gameObject = GameObject.Instantiate(prefab, position, Quaternion.identity) as GameObject;
+        GameObject gameObject = poolManager.SpawnGameObject(prefab);
         return gameObject.GetComponent<T>();
+    }
+
+    private void DestroyGameObject(GameObject gameObject)
+    {
+        poolManager.RecycleGameObject(gameObject);
     }
 
     private void SetupBlockPrefabMap()
