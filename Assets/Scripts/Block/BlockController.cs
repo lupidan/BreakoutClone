@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 public class BlockController : MonoBehaviour {
 
-    List<Block> availableBlocks;
+    public List<Block> availableBlocks;
 
     void Start()
     {

@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using UnityEditor;
 
-[CustomEditor(typeof(Paddle))]
+[CustomEditor(typeof(PaddleComponent))]
 public class NewBehaviourScript : Editor
 {
     [DrawGizmo(GizmoType.Selected)]
