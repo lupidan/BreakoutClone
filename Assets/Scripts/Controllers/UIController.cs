@@ -21,14 +21,14 @@ public class UIController : MonoBehaviour {
 
     private void GameStatusChanged(GameController gameController)
     {
-        mainMenuGUI.SetActive(gameController.status == GameController.Status.MainMenu);
-        gameHUD.SetActive(gameController.status != GameController.Status.MainMenu);
+        mainMenuGUI.SetActive(gameController.State == GameController.Status.MainMenu);
+        gameHUD.SetActive(gameController.State != GameController.Status.MainMenu);
         if (gameTouchGUI != null)
         {
-            gameTouchGUI.SetActive(gameController.status == GameController.Status.InGame);
+            gameTouchGUI.SetActive(gameController.State == GameController.Status.InGame);
         }
-        gameOverGUI.SetActive(gameController.status == GameController.Status.GameOver);
-        pauseMenuGUI.SetActive(gameController.status == GameController.Status.Paused);
+        gameOverGUI.SetActive(gameController.State == GameController.Status.GameOver);
+        pauseMenuGUI.SetActive(gameController.State == GameController.Status.Paused);
     }
 
 }

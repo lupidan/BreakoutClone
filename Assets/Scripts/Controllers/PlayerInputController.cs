@@ -60,6 +60,12 @@ public class PlayerInputController : MonoBehaviour {
             }
             CheckAndPauseGame(playerInput);
         }
+
+        //DEBUG:
+        if (Input.GetKeyDown(KeyCode.N))
+        {
+            Toolbox.GameController.GoToNextLevel();
+        }
     }
 
     private void UpdatePaddlePosition(Paddle paddle, PlayerInput playerInput)
@@ -84,11 +90,11 @@ public class PlayerInputController : MonoBehaviour {
         if (playerInput != null && playerInput.PauseButtonPressed)
         {
             GameController gameController = Toolbox.GameController;
-            if (gameController.status == GameController.Status.Paused)
+            if (gameController.State == GameController.Status.Paused)
             {
                 gameController.ContinueGame();
             }
-            else if (gameController.status == GameController.Status.InGame)
+            else if (gameController.State == GameController.Status.InGame)
             {
                 gameController.PauseGame();
             }

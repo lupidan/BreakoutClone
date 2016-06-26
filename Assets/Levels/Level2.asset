@@ -12,10 +12,10 @@ MonoBehaviour:
   m_Name: Level2
   m_EditorClassIdentifier: 
   levelName: Another level
-  blocks: 'WWrrWWrrWW
+  blocks: 'WWRRWWRRWW
 
-    rrWWrrWWrr
+    RRWWRRWWRR
 
-    WWrrWWrrWW
+    WWRRWWRRWW
 
 '

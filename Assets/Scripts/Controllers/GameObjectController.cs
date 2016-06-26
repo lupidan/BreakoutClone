@@ -226,6 +226,7 @@ public class GameObjectController: MonoBehaviour
     private T CreateObjectFromPrefab<T>(GameObject prefab, Vector3 position)
     {
         GameObject gameObject = poolManager.SpawnGameObject(prefab);
+        gameObject.transform.position = position;
         return gameObject.GetComponent<T>();
     }
 

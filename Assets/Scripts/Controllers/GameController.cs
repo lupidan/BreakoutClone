@@ -1,30 +1,95 @@
 ﻿using UnityEngine;
 
+/// <summary>
+/// A delegate type defining an event that happens on a GameController
+/// </summary>
+/// <param name="gameController">The game controller where the event happened.</param>
 public delegate void GameControlEvent(GameController gameController);
 
+/// <summary>
+/// A GameController instance controls the game status. Controls the score and lives, and informs observers about changes.
+/// </summary>
 public class GameController : MonoBehaviour {
 
+    /// <summary>
+    /// The status of the game.
+    /// </summary>
     public enum Status
     {
+        /// <summary>
+        /// On the main menu.
+        /// </summary>
         MainMenu,
+
+        /// <summary>
+        /// Playing the game.
+        /// </summary>
         InGame,
+
+        /// <summary>
+        /// The game is paused.
+        /// </summary>
         Paused,
+
+        /// <summary>
+        /// GameOver screen.
+        /// </summary>
         GameOver
     }
 
-    public int initialNumberOfLives = 3;
-
-    public int Score { get; private set; }
-    public int Lives { get; private set; }
-    public int CurrentLevelIndex { get; private set; }
-    public Status status { get; private set; }
-    public LevelInfo CurrentLevel { get; private set; }
-
+    /// <summary>
+    /// Method called when the score changes.
+    /// </summary>
     public event GameControlEvent OnScoreChanged;
+
+    /// <summary>
+    /// Method called when the number of lives changes.
+    /// </summary>
     public event GameControlEvent OnLivesChanged;
+
+    /// <summary>
+    /// Method called when the game status changes.
+    /// </summary>
     public event GameControlEvent OnStatusChanged;
+
+    /// <summary>
+    /// Method called when the level changes.
+    /// </summary>
     public event GameControlEvent OnLevelChanged;
 
+    /// <summary>
+    /// The initial number of lives.
+    /// </summary>
+    public int initialNumberOfLives = 5;
+
+    /// <summary>
+    /// The current player score.
+    /// </summary>
+    public int Score { get; private set; }
+
+    /// <summary>
+    /// The amount of lives left.
+    /// </summary>
+    public int Lives { get; private set; }
+
+    /// <summary>
+    /// The current level index.
+    /// </summary>
+    public int CurrentLevelIndex { get; private set; }
+
+    /// <summary>
+    /// The current level.
+    /// </summary>
+    public LevelInfo CurrentLevel { get; private set; }
+
+    /// <summary>
+    /// The current game status.
+    /// </summary>
+    public Status State { get; private set; }
+
+    /// <summary>
+    /// Array of levels to go trough.
+    /// </summary>
     public LevelInfo[] levels;
 
     void Start () {
@@ -85,7 +150,7 @@ public class GameController : MonoBehaviour {
     /// </summary>
     public void StartGame()
     {
-        if (status == Status.MainMenu || status == Status.GameOver)
+        if (State == Status.MainMenu || State == Status.GameOver)
         {
             ResetScore();
             ResetLives();
@@ -99,7 +164,8 @@ public class GameController : MonoBehaviour {
     /// </summary>
     public void GoToNextLevel()
     {
-        StartLevel(CurrentLevelIndex + 1);
+        int nextLevel = (CurrentLevelIndex + 1) % levels.Length;
+        StartLevel(nextLevel);
     }
 
     /// <summary>
@@ -116,7 +182,7 @@ public class GameController : MonoBehaviour {
     /// </summary>
     public void PauseGame()
     {
-        if (status == Status.InGame)
+        if (State == Status.InGame)
         {
             Time.timeScale = 0.0f;
             SetGameStatus(Status.Paused);
@@ -128,7 +194,7 @@ public class GameController : MonoBehaviour {
     /// </summary>
     public void ContinueGame()
     {
-        if (status == Status.Paused)
+        if (State == Status.Paused)
         {
             Time.timeScale = 1.0f;
             SetGameStatus(Status.InGame);
@@ -140,7 +206,7 @@ public class GameController : MonoBehaviour {
     /// </summary>
     public void FinishGame()
     {
-        if (status == Status.InGame)
+        if (State == Status.InGame)
         {
             SetGameStatus(Status.GameOver);
         }
@@ -153,9 +219,9 @@ public class GameController : MonoBehaviour {
         Toolbox.GameObjectController.CreateGame(CurrentLevel.blocks);
     }
 
-    private void SetGameStatus(Status status)
+    private void SetGameStatus(Status state)
     {
-        this.status = status;
+        this.State = state;
         if (OnStatusChanged != null)
         {
             OnStatusChanged(this);
