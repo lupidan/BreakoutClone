@@ -60,7 +60,8 @@ public class GameController : MonoBehaviour {
 
     public void StartGame()
     {
-        Toolbox.GameObjectController.CreateGame();
+        string level = "   RRRRR    \n  RRRRRRRRR \n  BBBMMBM   \n BMBMMMBMMM \n BMBBMMMBMMM\n BBMMMMBBBB \n   MMMMMMM  \n  RRbRRR    \n RRRbRRbRRR \nRRRRbbbbRRRR\nWWRbYbbYbRWW\nWWbbbbbbbbWW\n  bbb  bbb  \n BBB    BBB \nBBBB    BBBB";
+        Toolbox.GameObjectController.CreateGame(level);
         ResetScore();
         ResetLives();
 

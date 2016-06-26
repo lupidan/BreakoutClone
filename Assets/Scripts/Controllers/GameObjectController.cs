@@ -36,23 +36,7 @@ public class GameObjectController: MonoBehaviour
         blockContainer = new GameObject("Blocks");
         blockContainer.transform.position = new Vector3(0.0f, 3.0f, 0.0f);
         blocks = new List<Block>();
-        string[] patterns = {
-            "   RRRRR    ",
-"  RRRRRRRRR ",
-"  BBBMMBM   ",
-" BMBMMMBMMM ",
-" BMBBMMMBMMM",
-" BBMMMMBBBB ",
-"   MMMMMMM  ",
-"  RRbRRR    ",
-" RRRbRRbRRR ",
-"RRRRbbbbRRRR",
-"WWRbYbbYbRWW",
-"WWbbbbbbbbWW",
-"  bbb  bbb  ",
-" BBB    BBB ",
-"BBBB    BBBB"
-        };
+        string[] patterns = levelData.Split(new char[] { '\n' });
         CreateBlockMatrix(patterns);
     }
 
