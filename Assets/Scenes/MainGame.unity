@@ -872,18 +872,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ballPrefab: {fileID: 191454, guid: f758cceabbc31714cabb495c78abe3d3, type: 2}
   paddlePrefab: {fileID: 108420, guid: 9bf48141e23ae614cb82360116a8175a, type: 2}
+  greyBlockPrefab: {fileID: 104988, guid: c56b6519fa9af094a8655a901760d3eb, type: 2}
   blockSize: {x: 0.64, y: 0.32}
-  blockPrefabs:
-  - charID: 66
-    blockPrefab: {fileID: 170360, guid: 02ea0b294a722244993a49fb290281fc, type: 2}
-  - charID: 71
-    blockPrefab: {fileID: 182990, guid: 94508fdb6ab806b4fac5ed1437014e2c, type: 2}
-  - charID: 80
-    blockPrefab: {fileID: 149520, guid: d41f938d90a95c14fb32ee413d66ba64, type: 2}
+  blocksInfo:
   - charID: 82
-    blockPrefab: {fileID: 178860, guid: 2310a709299df3a4a8134fb61ac456de, type: 2}
+    color: {r: 0.9294118, g: 0.227451, b: 0.15294118, a: 1}
+  - charID: 66
+    color: {r: 0.5647059, g: 0.39607847, b: 0.16862746, a: 1}
+  - charID: 77
+    color: {r: 0.93725497, g: 0.7607844, b: 0.4784314, a: 1}
+  - charID: 98
+    color: {r: 0.39607847, g: 0.4901961, b: 0.7372549, a: 1}
+  - charID: 87
+    color: {r: 1, g: 0.9960785, b: 1, a: 1}
   - charID: 89
-    blockPrefab: {fileID: 167716, guid: 79f81137fa8c8cc4891dee64c026321c, type: 2}
+    color: {r: 0.93725497, g: 0.92549026, b: 0.29411766, a: 1}
 --- !u!114 &1960669815
 MonoBehaviour:
   m_ObjectHideFlags: 0

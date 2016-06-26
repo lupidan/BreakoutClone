@@ -6,7 +6,7 @@ public class GameHUD : MonoBehaviour {
     public Text scoreText;
     public Text livesText;
 
-    void OnEnable()
+    void Start()
     {
         GameController gameController = Toolbox.GameController;
         gameController.OnScoreChanged += ScoreWasUpdated;
@@ -14,13 +14,6 @@ public class GameHUD : MonoBehaviour {
 
         ScoreWasUpdated(gameController);
         LivesWereUpdated(gameController);
-    }
-
-    void OnDisable()
-    {
-        GameController gameController = Toolbox.GameController;
-        gameController.OnScoreChanged -= ScoreWasUpdated;
-        gameController.OnLivesChanged -= LivesWereUpdated;
     }
 
     void ScoreWasUpdated(GameController gameControl)

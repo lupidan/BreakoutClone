@@ -3,19 +3,19 @@ using System.Collections.Generic;
 
 public class GameObjectController: MonoBehaviour
 {
-
     [System.Serializable]
-    public class BlockPrefabEntry
+    public class BlockInfo
     {
-        public char charID;
-        public GameObject blockPrefab;
+        public char charID = ' ';
+        public Color color = new Color(1.0f, 1.0f, 1.0f, 1.0f);
     }
 
     public GameObject ballPrefab;
     public GameObject paddlePrefab;
+    public GameObject greyBlockPrefab;
     public Vector2 blockSize = new Vector2(0.64f, 0.32f);
-    public BlockPrefabEntry[] blockPrefabs;
-    private Dictionary<char, GameObject> blockPrefabMap;
+    public BlockInfo[] blocksInfo;
+    private Dictionary<char, BlockInfo> blockPrefabMap;
     private GameObjectPoolManager poolManager;
 
     public Ball ball { get; private set; }
@@ -29,15 +29,30 @@ public class GameObjectController: MonoBehaviour
         poolManager = new GameObjectPoolManager();
     }
 
-    public void CreateGame()
+    public void CreateGame(string levelData)
     {
         CreatePaddle(new Vector3(0.0f, -4.5f, 0.0f));
         CreateBall();
         blockContainer = new GameObject("Blocks");
         blockContainer.transform.position = new Vector3(0.0f, 3.0f, 0.0f);
         blocks = new List<Block>();
-
-        string[] patterns = { "BBBBBBBB", "RRRRRR", "YYYYYYYY", "PPPPPPP" };
+        string[] patterns = {
+            "   RRRRR    ",
+"  RRRRRRRRR ",
+"  BBBMMBM   ",
+" BMBMMMBMMM ",
+" BMBBMMMBMMM",
+" BBMMMMBBBB ",
+"   MMMMMMM  ",
+"  RRbRRR    ",
+" RRRbRRbRRR ",
+"RRRRbbbbRRRR",
+"WWRbYbbYbRWW",
+"WWbbbbbbbbWW",
+"  bbb  bbb  ",
+" BBB    BBB ",
+"BBBB    BBBB"
+        };
         CreateBlockMatrix(patterns);
     }
 
@@ -76,11 +91,12 @@ public class GameObjectController: MonoBehaviour
 
     public Block CreateBlock(char blockID, Vector3 position)
     {
-        GameObject prefab = null;
-        if (blockPrefabMap.TryGetValue(blockID, out prefab))
+        BlockInfo blockInfo = null;
+        if (blockPrefabMap.TryGetValue(blockID, out blockInfo))
         {
-            Block block = CreateObjectFromPrefab<Block>(prefab, position);
+            Block block = CreateObjectFromPrefab<Block>(greyBlockPrefab, position);
             blocks.Add(block);
+            block.spriteRenderer.color = blockInfo.color;
             return block;
         }
         return null;
@@ -109,11 +125,11 @@ public class GameObjectController: MonoBehaviour
 
     private void SetupBlockPrefabMap()
     {
-        blockPrefabMap = new Dictionary<char, GameObject>();
-        for (int i = 0; i < blockPrefabs.Length; i++)
+        blockPrefabMap = new Dictionary<char, BlockInfo>();
+        for (int i = 0; i < blocksInfo.Length; i++)
         {
-            BlockPrefabEntry entry = blockPrefabs[i];
-            blockPrefabMap[entry.charID] = entry.blockPrefab;
+            BlockInfo blockInfo = blocksInfo[i];
+            blockPrefabMap[blockInfo.charID] = blockInfo;
         }
     }
 
