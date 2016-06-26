@@ -11,7 +11,7 @@ public class KeyboardPlayerInput : PlayerInput {
 
     public float UpdateHorizontalPosition(float currentHorizontalPosition)
     {
-        float horizontalAxisMovement = Input.GetAxis("Horizontal");
+        float horizontalAxisMovement = Input.GetAxisRaw("Horizontal");
         return currentHorizontalPosition + (horizontalSpeed * horizontalAxisMovement * Time.deltaTime);
     }
 
