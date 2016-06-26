@@ -54,4 +54,15 @@ public class Paddle: MonoBehaviour {
         }
     }
 
+    /// <summary>
+    /// Updates the X position of the paddle.
+    /// </summary>
+    /// <param name="xPosition">The new x position of the paddle.</param>
+    public void UpdateXPosition(float xPosition)
+    {
+        Vector3 newPosition = transform.position;
+        newPosition.x = xPosition;
+        transform.position = moveArea.ClampPosition(newPosition);
+    }
+
 }

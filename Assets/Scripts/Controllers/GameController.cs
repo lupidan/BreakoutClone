@@ -9,6 +9,7 @@ public class GameController : MonoBehaviour {
     public int Score { get; private set; }
     public int Lives { get; private set; }
     public int CurrentLevelIndex { get; private set; }
+    public bool IsPaused { get; private set; }
     public LevelInfo CurrentLevel { get; private set; }
 
     public event GameControlEvent OnScoreChanged;
@@ -89,6 +90,9 @@ public class GameController : MonoBehaviour {
 
     public void PauseGame()
     {
+        Time.timeScale = 0.0f;
+        IsPaused = true;
+
         if (OnGamePause != null)
         {
             OnGamePause(this);
@@ -97,6 +101,9 @@ public class GameController : MonoBehaviour {
 
     public void ContinueGame()
     {
+        Time.timeScale = 1.0f;
+        IsPaused = false;
+
         if (OnGameContinue != null)
         {
             OnGameContinue(this);

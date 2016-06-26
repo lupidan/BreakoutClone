@@ -44,5 +44,4 @@ public interface PlayerInput {
     /// <returns>The new X position after reading the input.</returns>
     float UpdateXPosition(float currentXPosition);
 	
-
 }

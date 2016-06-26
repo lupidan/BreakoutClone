@@ -62,7 +62,7 @@ public class KeyboardPlayerInput : PlayerInput {
     {
         get
         {
-            return Input.GetButton("Cancel");
+            return Input.GetButtonDown("Cancel");
         }
     }
 }
