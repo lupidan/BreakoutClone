@@ -8,15 +8,20 @@ public class GameController : MonoBehaviour {
 
     public int Score { get; private set; }
     public int Lives { get; private set; }
+    public int CurrentLevelIndex { get; private set; }
+    public LevelInfo CurrentLevel { get; private set; }
 
     public event GameControlEvent OnScoreChanged;
     public event GameControlEvent OnLivesChanged;
-    public event GameControlEvent OnGameStart;
+    public event GameControlEvent OnLevelStart;
     public event GameControlEvent OnGamePause;
     public event GameControlEvent OnGameContinue;
 
+    
+    public LevelInfo[] levels;
+
     void Start () {
-        StartGame();
+        StartLevel(0);
     }
 
     public void AddScore(int score)
@@ -58,16 +63,18 @@ public class GameController : MonoBehaviour {
         }
     }
 
-    public void StartGame()
+    public void StartLevel(int level)
     {
-        string level = "   RRRRR    \n  RRRRRRRRR \n  BBBMMBM   \n BMBMMMBMMM \n BMBBMMMBMMM\n BBMMMMBBBB \n   MMMMMMM  \n  RRbRRR    \n RRRbRRbRRR \nRRRRbbbbRRRR\nWWRbYbbYbRWW\nWWbbbbbbbbWW\n  bbb  bbb  \n BBB    BBB \nBBBB    BBBB";
-        Toolbox.GameObjectController.CreateGame(level);
+        level = Mathf.Clamp(level, 0, levels.Length - 1);
+        CurrentLevelIndex = level;
+        CurrentLevel = levels[level];
+        Toolbox.GameObjectController.CreateGame(CurrentLevel.blocks);
         ResetScore();
         ResetLives();
 
-        if (OnGameStart != null)
+        if (OnLevelStart != null)
         {
-            OnGameStart(this);
+            OnLevelStart(this);
         }
     }
 
