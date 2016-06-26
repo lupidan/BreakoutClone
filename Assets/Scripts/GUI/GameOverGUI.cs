@@ -18,7 +18,7 @@ public class GameOverGUI : MonoBehaviour {
     /// </summary>
     public void ExitButtonPressed()
     {
-
+        Toolbox.GameController.GoToMainMenu();
     }
 
 }

@@ -220,11 +220,6 @@ public class GameObjectController: MonoBehaviour
             block.transform.parent = null;
             gameBlocks.Remove(block);
             DestroyGameObject(block.gameObject);
-
-            if (gameBlocks.Count == 0)
-            {
-                Toolbox.GameController.GoToNextLevel();
-            }
         }
     }
 

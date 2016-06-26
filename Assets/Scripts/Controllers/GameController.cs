@@ -101,6 +101,15 @@ public class GameController : MonoBehaviour {
     {
         StartLevel(CurrentLevelIndex + 1);
     }
+
+    /// <summary>
+    /// Goes to the main menu.
+    /// </summary>
+    public void GoToMainMenu()
+    {
+        SetGameStatus(Status.MainMenu);
+        Toolbox.GameObjectController.DestroyGame();
+    }
     
     /// <summary>
     /// Pauses the game.
