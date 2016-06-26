@@ -54,7 +54,7 @@ public class Ball : MonoBehaviour, PoolableComponent {
         {
             Block block = collision.gameObject.GetComponent<Block>();
             Toolbox.GameObjectController.DestroyBlock(block);
-            Toolbox.GameController.AddScore(block.points);
+            Toolbox.GameController.AddPoints(block.points);
         }
     }
 

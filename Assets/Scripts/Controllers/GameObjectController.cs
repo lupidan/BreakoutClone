@@ -26,21 +26,11 @@ using UnityEngine;
 using System.Collections.Generic;
 
 /// <summary>
-/// A delegate type that defines an event happening in a GameObjectController
-/// </summary>
-/// <param name="controller">The controller where the event happened.</param>
-public delegate void GameObjectControllerEvent(GameObjectController controller);
-
-/// <summary>
 /// A GameObjectController is responsible of creating, managing and destroying all the game objects for each level.
 /// It uses an GameObjectPoolManager to reuse created GameObject instances.
 /// </summary>
 public class GameObjectController: MonoBehaviour
 {
-    /// <summary>
-    /// Event to be called when there are no more blocks in the scene.
-    /// </summary>
-    public event GameObjectControllerEvent OnNoMoreBlocks;
 
     /// <summary>
     /// A Block info defines a type of block to be placed on the game field.
@@ -186,8 +176,13 @@ public class GameObjectController: MonoBehaviour
     /// Destroys a specific Paddle.
     /// </summary>
     /// <param name="paddle">The Paddle component of the GameObject we want to destroy.</param>
-    public void DestroyPaddle(Paddle paddle)
+    public void DestroyPaddle(Paddle paddle = null)
     {
+        if (paddle == null)
+        {
+            paddle = gamePaddle;
+        }
+
         if (paddle != null && gamePaddle == paddle)
         {
             gamePaddle = null;
@@ -226,9 +221,9 @@ public class GameObjectController: MonoBehaviour
             gameBlocks.Remove(block);
             DestroyGameObject(block.gameObject);
 
-            if (gameBlocks.Count == 0 && OnNoMoreBlocks != null)
+            if (gameBlocks.Count == 0)
             {
-                OnNoMoreBlocks(this);
+                Toolbox.GameController.GoToNextLevel();
             }
         }
     }

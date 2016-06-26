@@ -50,7 +50,7 @@ public class GameHUD : MonoBehaviour {
         GameController gameController = Toolbox.GameController;
         gameController.OnScoreChanged += ScoreWasUpdated;
         gameController.OnLivesChanged += LivesWereUpdated;
-        gameController.OnLevelStart += LevelDidStart;
+        gameController.OnLevelChanged += LevelDidChange;
 
         RefreshHUD(gameController);
     }
@@ -59,7 +59,7 @@ public class GameHUD : MonoBehaviour {
     {
         ScoreWasUpdated(gameController);
         LivesWereUpdated(gameController);
-        LevelDidStart(gameController);
+        LevelDidChange(gameController);
     }
 
     private void ScoreWasUpdated(GameController gameController)
@@ -72,7 +72,7 @@ public class GameHUD : MonoBehaviour {
         livesText.text = "x " + gameController.Lives;
     }
 
-    private void LevelDidStart(GameController gameController)
+    private void LevelDidChange(GameController gameController)
     {
         string text = "";
         if (gameController.CurrentLevel != null)

@@ -62,6 +62,11 @@ public class Toolbox : MonoBehaviour {
     public static PlayerInputController PlayerInputController { get { return Instance.playerInputController; } }
 
     /// <summary>
+    /// Convenience read-only variable containing the UIController of the singleton Toolbox.
+    /// </summary>
+    public static UIController UIController { get { return Instance.uiController; } }
+
+    /// <summary>
     /// Reference to the GameController instance.
     /// </summary>
     public GameController gameController = null;
@@ -75,5 +80,10 @@ public class Toolbox : MonoBehaviour {
     /// Reference to the PlayerInputController instance.
     /// </summary>
     public PlayerInputController playerInputController = null;
+
+    /// <summary>
+    /// Reference to the UIController instance.
+    /// </summary>
+    public UIController uiController = null;
 
 }

@@ -84,11 +84,11 @@ public class PlayerInputController : MonoBehaviour {
         if (playerInput != null && playerInput.PauseButtonPressed)
         {
             GameController gameController = Toolbox.GameController;
-            if (gameController.IsPaused)
+            if (gameController.status == GameController.Status.Paused)
             {
                 gameController.ContinueGame();
             }
-            else
+            else if (gameController.status == GameController.Status.InGame)
             {
                 gameController.PauseGame();
             }
