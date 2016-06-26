@@ -38,11 +38,11 @@ public class PlayerInputController : MonoBehaviour {
     {
         if (SystemInfo.deviceType == DeviceType.Handheld && Input.touchSupported)
         {
-            playerInput = new TouchScreenPlayerInput(7.0f);
+            playerInput = new TouchScreenPlayerInput(10.0f);
         }
         else
         {
-            playerInput = new KeyboardPlayerInput(7.0f);
+            playerInput = new KeyboardPlayerInput(10.0f);
         }
     }
 

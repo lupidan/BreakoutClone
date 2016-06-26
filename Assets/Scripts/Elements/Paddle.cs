@@ -40,6 +40,13 @@ public class Paddle: MonoBehaviour {
     /// </summary>
     public Rect moveArea = new Rect(-5.0f, -5.0f, 10.0f, 10.0f);
 
+    private SpriteRenderer spriteRenderer = null;
+
+    void OnAwake()
+    {
+        this.spriteRenderer = GetComponent<SpriteRenderer>();
+    }
+
     void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.tag == Ball.Tag)
