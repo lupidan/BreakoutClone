@@ -694,8 +694,9 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 224: {fileID: 1568371565}
+  - 114: {fileID: 1568371566}
   m_Layer: 5
-  m_Name: InGameGUI
+  m_Name: GameHUD
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -721,6 +722,19 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1568371566
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1568371564}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3e29cdd487d5dd94ebecf589b5c517c9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  scoreText: {fileID: 1249420520}
+  livesText: {fileID: 2065516665}
 --- !u!1 &1743628259
 GameObject:
   m_ObjectHideFlags: 0
@@ -810,6 +824,7 @@ GameObject:
   - 114: {fileID: 1960669812}
   - 114: {fileID: 1960669815}
   - 114: {fileID: 1960669814}
+  - 114: {fileID: 1960669816}
   m_Layer: 0
   m_Name: Toolbox
   m_TagString: Untagged
@@ -830,6 +845,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gameController: {fileID: 1960669815}
   gameObjectController: {fileID: 1960669814}
+  playerInputController: {fileID: 1960669816}
 --- !u!4 &1960669813
 Transform:
   m_ObjectHideFlags: 0
@@ -880,6 +896,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   initialNumberOfLives: 3
+--- !u!114 &1960669816
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1960669811}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1d9ba78c411892e47ac13ca6a342ba6e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2065516662
 GameObject:
   m_ObjectHideFlags: 0
