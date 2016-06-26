@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 
 public class GameTouchGUI : MonoBehaviour {
-	
+
     public void LaunchButtonWasPressed()
     {
         Ball ball = Toolbox.GameObjectController.gameBall;

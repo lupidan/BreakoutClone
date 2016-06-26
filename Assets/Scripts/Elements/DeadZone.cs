@@ -36,6 +36,7 @@ public class DeadZone : MonoBehaviour {
         {
             Ball ball = collider.gameObject.GetComponent<Ball>();
             Toolbox.GameObjectController.DestroyBall(ball);
+            Toolbox.GameController.SubstractLife();
         }
     }
 

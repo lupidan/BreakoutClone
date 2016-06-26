@@ -60,6 +60,8 @@ public class GameController : MonoBehaviour {
         {
             OnLivesChanged(this);
         }
+
+        Toolbox.GameObjectController.CreateBall();
     }
 
     public void ResetLives()

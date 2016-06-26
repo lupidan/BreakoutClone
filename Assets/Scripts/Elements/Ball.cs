@@ -25,12 +25,6 @@
 using UnityEngine;
 
 /// <summary>
-/// A delegate defining an event that happened on a Ball component.
-/// </summary>
-/// <param name="ball">The Ball component where the event happened.</param>
-public delegate void BallEvent(Ball ball);
-
-/// <summary>
 /// A Ball component implements the behaviour of a ball for the Game.
 /// Initially the ball needs to be launched.
 /// The Ball conforms to the PoolableComponent, making it suitable to interact with a GameObjectPool.
@@ -41,11 +35,6 @@ public class Ball : MonoBehaviour, PoolableComponent {
     /// The GameObject tag that all Ball elements should have.
     /// </summary>
     public static string Tag = "Ball";
-
-    /// <summary>
-    /// Event called when the Ball's GameObject is destroyed.
-    /// </summary>
-    public event BallEvent OnBallDestroyed;
 
     /// <summary>
     /// Whether the ball is on the playfield or not. Initially is false.
@@ -65,6 +54,7 @@ public class Ball : MonoBehaviour, PoolableComponent {
         {
             Block block = collision.gameObject.GetComponent<Block>();
             Toolbox.GameObjectController.DestroyBlock(block);
+            Toolbox.GameController.AddScore(block.points);
         }
     }
 
@@ -83,16 +73,11 @@ public class Ball : MonoBehaviour, PoolableComponent {
     // PoolableObject implementation
     public void OnSpawn()
     {
-        OnBallDestroyed = null;
         isOnPlay = false;
     }
 
     public void OnDespawn()
     {
-        if (OnBallDestroyed != null)
-        {
-            OnBallDestroyed(this);
-            OnBallDestroyed = null;
-        }
+        isOnPlay = false;
     }
 }

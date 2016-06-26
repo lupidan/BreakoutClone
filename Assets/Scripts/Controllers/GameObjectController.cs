@@ -146,12 +146,15 @@ public class GameObjectController: MonoBehaviour
     /// </summary>
     /// <param name="paddle">The Paddle component to attach the Ball to.</param>
     /// <returns>The Ball component of the created GameObject.</returns>
-    public Ball CreateBall(Paddle paddle)
+    public Ball CreateBall(Paddle paddle = null)
     {
+        if (paddle == null)
+        {
+            paddle = gamePaddle;
+        }
         gameBall = CreateObjectFromPrefab<Ball>(ballPrefab, Vector3.zero);
         gameBall.transform.parent = paddle.transform;
         gameBall.transform.localPosition = new Vector3(0.0f, 1.0f, 0.0f);
-        gameBall.OnBallDestroyed += BallWasDestroyed;
         return gameBall;
     }
 
@@ -273,8 +276,6 @@ public class GameObjectController: MonoBehaviour
             {
                 block.transform.parent = blockContainer.transform;
                 block.transform.localPosition = new Vector3(localXPos, localYPos, 0.0f);
-
-                block.OnBlockDestroyed += BlockWasDestroyed;
             }
             localXPos += blockSize.x;
         }
@@ -304,17 +305,6 @@ public class GameObjectController: MonoBehaviour
         {
             GameObject.Destroy(blockContainer);
         }
-    }
-
-    private void BlockWasDestroyed(Block block)
-    {
-        Toolbox.GameController.AddScore(block.points);
-    }
-
-    private void BallWasDestroyed(Ball ball)
-    {
-        Toolbox.GameController.SubstractLife();
-        CreateBall(gamePaddle);
     }
 
 }

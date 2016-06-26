@@ -25,26 +25,15 @@
 using UnityEngine;
 
 /// <summary>
-/// A delegate type that defines an event happening in a Block component.
-/// </summary>
-/// <param name="block">The Block component where the event happened.</param>
-public delegate void BlockEvent(Block block);
-
-/// <summary>
 /// A Block component implements the behaviour of a block for the Game.
 /// The Block conforms to the PoolableComponent, making it suitable to interact with a GameObjectPool.
 /// </summary>
-public class Block : MonoBehaviour, PoolableComponent {
+public class Block : MonoBehaviour {
 
     /// <summary>
     /// The GameObject tag that all Block elements should have.
     /// </summary>
     public static string Tag = "Block";
-
-    /// <summary>
-    /// Event called when the Block's GameObject is destroyed.
-    /// </summary>
-    public event BlockEvent OnBlockDestroyed;
 
     /// <summary>
     /// The amount of points this block is worth.
@@ -61,18 +50,4 @@ public class Block : MonoBehaviour, PoolableComponent {
         this.spriteRenderer = GetComponent<SpriteRenderer>();
     }
 
-    // PoolableObject implementation
-    public void OnSpawn()
-    {
-        OnBlockDestroyed = null;
-    }
-
-    public void OnDespawn()
-    {
-        if (OnBlockDestroyed != null)
-        {
-            OnBlockDestroyed(this);
-            OnBlockDestroyed = null;
-        }
-    }
 }
