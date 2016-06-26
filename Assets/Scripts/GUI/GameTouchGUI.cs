@@ -1,7 +1,13 @@
 ﻿using UnityEngine;
 
+/// <summary>
+/// A GameTouchGUI contains buttons to execute Launch and Pause the game for touch interfaces.
+/// </summary>
 public class GameTouchGUI : MonoBehaviour {
 
+    /// <summary>
+    /// Method called when the launch button is pressed.
+    /// </summary>
     public void LaunchButtonWasPressed()
     {
         Ball ball = Toolbox.GameObjectController.gameBall;
@@ -12,6 +18,9 @@ public class GameTouchGUI : MonoBehaviour {
         }
     }
 
+    /// <summary>
+    /// Method called when the pause button is pressed.
+    /// </summary>
     public void PauseButtonWasPressed()
     {
         GameController gameController = Toolbox.GameController;
