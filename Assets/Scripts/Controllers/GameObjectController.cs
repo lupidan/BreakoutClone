@@ -281,7 +281,7 @@ public class GameObjectController: MonoBehaviour
 
     private void BlockWasDestroyed(Block block)
     {
-        Toolbox.GameController.AddScore(block.addedScore);
+        Toolbox.GameController.AddScore(block.points);
     }
 
     private void BallWasDestroyed(Ball ball)

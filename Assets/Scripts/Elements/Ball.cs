@@ -38,14 +38,14 @@ public delegate void BallEvent(Ball ball);
 public class Ball : MonoBehaviour, PoolableComponent {
 
     /// <summary>
-    /// Event callend when the Ball's GameObject is destroyed.
-    /// </summary>
-    public event BallEvent OnBallDestroyed;
-
-    /// <summary>
     /// The GameObject tag that all Ball elements should have.
     /// </summary>
     public static string Tag = "Ball";
+
+    /// <summary>
+    /// Event called when the Ball's GameObject is destroyed.
+    /// </summary>
+    public event BallEvent OnBallDestroyed;
 
     /// <summary>
     /// Whether the ball is on the playfield or not. Initially is false.
