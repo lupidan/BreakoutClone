@@ -27,7 +27,9 @@ using System.Collections.Generic;
 
 
 /// <summary>
-/// The PoolableComponent interface defines a behaviour to be implemented by GameObject components when they work with a GameObjectPool.
+/// The PoolableComponent interface defines a behaviour to be implemented by GameObject components when they need to interact with a GameObjectPool.
+/// A component does not require to implement this protocol in order to work with a GameObjectPool.
+/// Components should implement this interface when they need to perform certain actions when Spawned and Despawned from the pool.
 /// </summary>
 public interface PoolableComponent
 {

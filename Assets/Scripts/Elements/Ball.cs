@@ -33,7 +33,7 @@ public delegate void BallEvent(Ball ball);
 /// <summary>
 /// A Ball component implements the behaviour of a ball for the Game.
 /// Initially the ball needs to be launched.
-/// The Ball conforms to the PoolableComponent, making it suitable to work with a GameObjectPool.
+/// The Ball conforms to the PoolableComponent, making it suitable to interact with a GameObjectPool.
 /// </summary>
 public class Ball : MonoBehaviour, PoolableComponent {
 

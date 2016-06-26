@@ -32,7 +32,7 @@ public delegate void BlockEvent(Block block);
 
 /// <summary>
 /// A Block component implements the behaviour of a block for the Game.
-/// The Block conforms to the PoolableComponent, making it suitable to work with a GameObjectPool.
+/// The Block conforms to the PoolableComponent, making it suitable to interact with a GameObjectPool.
 /// </summary>
 public class Block : MonoBehaviour, PoolableComponent {
 

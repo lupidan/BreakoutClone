@@ -1,10 +1,43 @@
-﻿using UnityEngine;
-using System.Collections;
-using System;
+﻿///
+/// The MIT License(MIT)
+/// 
+/// Copyright(c) 2016 Daniel Lupiañez Casares
+/// 
+/// Permission is hereby granted, free of charge, to any person obtaining a copy
+/// of this software and associated documentation files (the "Software"), to deal
+/// in the Software without restriction, including without limitation the rights
+/// to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+/// copies of the Software, and to permit persons to whom the Software is
+/// furnished to do so, subject to the following conditions:
+/// 
+/// The above copyright notice and this permission notice shall be included in all
+/// copies or substantial portions of the Software.
+/// 
+/// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+/// IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+/// FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+/// AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+/// LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+/// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+/// SOFTWARE.
+///
 
+using UnityEngine;
+
+/// <summary>
+/// A Paddle component that implements the behaviour of a paddle in the game.
+/// </summary>
 public class Paddle: MonoBehaviour {
 
-    public float launchSpeed = 10.0f;
+    /// <summary>
+    /// The speed the ball is bounced up when colliding with the paddle, or when it's first launched.
+    /// </summary>
+    public float launchSpeed = 7.0f;
+
+    /// <summary>
+    /// The move area this component's GameObject is allowed to move in.
+    /// The area is highlighted when the paddle is selected in the editor.
+    /// </summary>
     public Rect moveArea = new Rect(-5.0f, -5.0f, 10.0f, 10.0f);
 
     void OnCollisionEnter2D(Collision2D collision)
