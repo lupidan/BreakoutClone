@@ -50,7 +50,7 @@ public class KeyboardPlayerInput : PlayerInput {
         return currentXPosition + (horizontalSpeed * horizontalAxisMovement * Time.deltaTime);
     }
 
-    public bool ActionButtonPressed
+    public bool LaunchButtonPressed
     {
         get
         {
@@ -63,6 +63,14 @@ public class KeyboardPlayerInput : PlayerInput {
         get
         {
             return Input.GetButtonDown("Cancel");
+        }
+    }
+
+    public bool CanUpdateGame
+    {
+        get
+        {
+            return true;
         }
     }
 }

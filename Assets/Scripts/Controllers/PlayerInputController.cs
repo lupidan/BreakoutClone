@@ -48,7 +48,7 @@ public class PlayerInputController : MonoBehaviour {
 
     void Update()
     {
-        if (playerInput != null)
+        if (playerInput != null && playerInput.CanUpdateGame)
         {
             Paddle paddle = Toolbox.GameObjectController.gamePaddle;
             Ball ball = Toolbox.GameObjectController.gameBall;
@@ -73,7 +73,7 @@ public class PlayerInputController : MonoBehaviour {
 
     private void CheckAndLaunchBall(Ball ball, PlayerInput playerInput, float launchSpeed)
     {
-        if (playerInput != null && playerInput.ActionButtonPressed && ball != null && !ball.isOnPlay)
+        if (playerInput != null && playerInput.LaunchButtonPressed && ball != null && !ball.isOnPlay)
         {
             ball.Launch(launchSpeed);
         }

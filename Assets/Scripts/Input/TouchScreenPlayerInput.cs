@@ -22,8 +22,8 @@
 /// SOFTWARE.
 ///
 
-using System;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class TouchScreenPlayerInput : PlayerInput
 {
@@ -45,7 +45,6 @@ public class TouchScreenPlayerInput : PlayerInput
     // PlayerInput interface implementation
     public float UpdateXPosition(float currentXPosition)
     {
-
         int numberOfTouches = Input.touchCount;
         bool rightPressed = false;
         bool leftPressed = false;
@@ -67,19 +66,11 @@ public class TouchScreenPlayerInput : PlayerInput
         return currentXPosition + (horizontalSpeed * xAxis * Time.deltaTime);
     }
 
-    public bool ActionButtonPressed
+    public bool LaunchButtonPressed
     {
         get
         {
-            int numberOfTouches = Input.touchCount;
-            for (int i=0; i < numberOfTouches; i++)
-            {
-                Touch touch = Input.touches[i];
-                if (touch.phase == TouchPhase.Began)
-                {
-                    return true;
-                }
-            }
+            // On touch, we can only launch with the GUI button
             return false;
         }
     }
@@ -90,6 +81,14 @@ public class TouchScreenPlayerInput : PlayerInput
         {
             // On touch, we can only pause with the GUI button
             return false;
+        }
+    }
+
+    public bool CanUpdateGame
+    {
+        get
+        {
+            return EventSystem.current.currentSelectedGameObject == null;
         }
     }
 

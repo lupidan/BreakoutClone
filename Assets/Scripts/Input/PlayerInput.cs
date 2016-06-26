@@ -28,14 +28,19 @@
 public interface PlayerInput {
 
     /// <summary>
-    /// Returns true when the Action Button was pressed.
+    /// Returns true when the Launch Button was pressed.
     /// </summary>
-    bool ActionButtonPressed { get; }
+    bool LaunchButtonPressed { get; }
 
     /// <summary>
     /// Returns true when the Pause Button was pressed.
     /// </summary>
     bool PauseButtonPressed { get; }
+
+    /// <summary>
+    /// Whether the game can be updated with this input.
+    /// </summary>
+    bool CanUpdateGame { get; }
 
     /// <summary>
     /// Updates an horizontal position by reading the input.
