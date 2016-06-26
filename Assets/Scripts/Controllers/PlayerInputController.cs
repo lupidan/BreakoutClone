@@ -15,13 +15,13 @@ public class PlayerInputController : MonoBehaviour {
                 UpdatePaddlePosition(paddle, playerInput);
 
                 Ball ball = Toolbox.GameObjectController.gameBall;
-                if (playerInput.ActionButton && ball != null && !ball.isOnPlay)
+                if (playerInput.ActionButtonPressed && ball != null && !ball.isOnPlay)
                 {
                     ball.Launch(paddle.launchSpeed);
                 }
             }
             
-            if (playerInput.PauseButton)
+            if (playerInput.PauseButtonPressed)
             {
 
             }
