@@ -1,5 +1,5 @@
 ﻿using UnityEngine;
-using System.Collections;
+
 
 public class PlayerInputController : MonoBehaviour {
 
@@ -31,7 +31,7 @@ public class PlayerInputController : MonoBehaviour {
     private void UpdatePaddlePosition(Paddle paddle, PlayerInput playerInput)
     {
         Vector3 newPosition = paddle.transform.position;
-        newPosition.x = playerInput.UpdateHorizontalPosition(paddle.transform.position.x);
+        newPosition.x = playerInput.UpdateXPosition(paddle.transform.position.x);
         paddle.transform.position = paddle.moveArea.ClampPosition(newPosition);
     }
 }
