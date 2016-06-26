@@ -32,7 +32,19 @@ public class PlayerInputController : MonoBehaviour {
     /// <summary>
     /// The player input instance this controller should use to update.
     /// </summary>
-    public PlayerInput playerInput = new KeyboardPlayerInput(7.0f);
+    public PlayerInput playerInput = null;
+
+    void Awake()
+    {
+        if (SystemInfo.deviceType == DeviceType.Handheld && Input.touchSupported)
+        {
+            playerInput = new TouchScreenPlayerInput(7.0f);
+        }
+        else
+        {
+            playerInput = new KeyboardPlayerInput(7.0f);
+        }
+    }
 
     void Update()
     {
