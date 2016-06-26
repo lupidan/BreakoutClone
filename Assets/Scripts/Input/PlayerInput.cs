@@ -2,6 +2,7 @@
 public interface PlayerInput {
 
     float UpdateHorizontalPosition(float currentHorizontalPosition);
-	bool ActionButton { get; }
+	bool ActionButtonPressed { get; }
+    bool PauseButtonPressed { get; }
 
 }

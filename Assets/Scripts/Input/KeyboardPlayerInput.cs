@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 public class KeyboardPlayerInput : PlayerInput {
 
@@ -15,7 +16,7 @@ public class KeyboardPlayerInput : PlayerInput {
         return currentHorizontalPosition + (horizontalSpeed * horizontalAxisMovement * Time.deltaTime);
     }
 
-    public bool ActionButton
+    public bool ActionButtonPressed
     {
         get
         {
@@ -23,4 +24,11 @@ public class KeyboardPlayerInput : PlayerInput {
         }
     }
 
+    public bool PauseButtonPressed
+    {
+        get
+        {
+            return Input.GetButton("Cancel");
+        }
+    }
 }

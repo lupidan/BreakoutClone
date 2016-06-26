@@ -22,6 +22,13 @@ public class GameController : MonoBehaviour {
 
     void Start () {
         StartLevel(0);
+
+        Toolbox.GameObjectController.OnNoMoreBlocks += DestroyedAllBlocks;
+    }
+
+    private void DestroyedAllBlocks(GameObjectController controller)
+    {
+        StartLevel(CurrentLevelIndex + 1);
     }
 
     public void AddScore(int score)
@@ -68,6 +75,8 @@ public class GameController : MonoBehaviour {
         level = Mathf.Clamp(level, 0, levels.Length - 1);
         CurrentLevelIndex = level;
         CurrentLevel = levels[level];
+
+        Toolbox.GameObjectController.DestroyGame();
         Toolbox.GameObjectController.CreateGame(CurrentLevel.blocks);
         ResetScore();
         ResetLives();

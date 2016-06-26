@@ -1,27 +1,87 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
 
+/// <summary>
+/// A delegate type that defines an event happening in a GameObjectController
+/// </summary>
+/// <param name="controller">The controller where the event happened.</param>
+public delegate void GameObjectControllerEvent(GameObjectController controller);
+
+/// <summary>
+/// A GameObjectController is responsible of creating, managing and destroying all the game objects for each level.
+/// It uses an GameObjectPoolManager to reuse created GameObject instances.
+/// </summary>
 public class GameObjectController: MonoBehaviour
 {
+    /// <summary>
+    /// Event to be called when there are no more blocks in the scene.
+    /// </summary>
+    public event GameObjectControllerEvent OnNoMoreBlocks;
+
+    /// <summary>
+    /// A Block info defines a type of block to be placed on the game field.
+    /// </summary>
     [System.Serializable]
     public class BlockInfo
     {
+        /// <summary>
+        /// A Char that identifies the type of block.
+        /// </summary>
         public char charID = ' ';
+
+        /// <summary>
+        /// The color to apply to the block.
+        /// </summary>
         public Color color = new Color(1.0f, 1.0f, 1.0f, 1.0f);
     }
 
+    /// <summary>
+    /// Ball prefab to instantiate when creating a Ball.
+    /// </summary>
     public GameObject ballPrefab;
-    public GameObject paddlePrefab;
-    public GameObject greyBlockPrefab;
-    public Vector2 blockSize = new Vector2(0.64f, 0.32f);
-    public BlockInfo[] blocksInfo;
-    private Dictionary<char, BlockInfo> blockPrefabMap;
-    private GameObjectPoolManager poolManager;
 
-    public Ball ball { get; private set; }
-    public Paddle paddle { get; private set; }
+    /// <summary>
+    /// Paddle prefab to instantiate when creating a Paddle.
+    /// </summary>
+    public GameObject paddlePrefab;
+
+    /// <summary>
+    /// Grey block prefab to instantiate when creating a block.
+    /// </summary>
+    public GameObject greyBlockPrefab;
+
+    /// <summary>
+    /// The expected size for all the blocks.
+    /// </summary>
+    public Vector2 blockSize = new Vector2(0.64f, 0.32f);
+
+    /// <summary>
+    /// An array of BlockInfo instances, defining the types of blocks we can instantiate.
+    /// </summary>
+    public BlockInfo[] blocksInfo;
+
+    /// <summary>
+    /// The Ball currently present in the game.
+    /// </summary>
+    public Ball gameBall { get; private set; }
+
+    /// <summary>
+    /// The paddle currently present in the game.
+    /// </summary>
+    public Paddle gamePaddle { get; private set; }
+
+    /// <summary>
+    /// The parent game object for all the blocks.
+    /// </summary>
     public GameObject blockContainer { get; private set; }
-    public List<Block> blocks { get; private set; }
+
+    /// <summary>
+    /// A list containing all the blocks present in the game.
+    /// </summary>
+    public List<Block> gameBlocks { get; private set; }
+
+    private Dictionary<char, BlockInfo> blockPrefabDictionary;
+    private GameObjectPoolManager poolManager;
 
     void Awake()
     {
@@ -29,70 +89,120 @@ public class GameObjectController: MonoBehaviour
         poolManager = new GameObjectPoolManager();
     }
 
+    /// <summary>
+    /// Creates a game with an available level data.
+    /// </summary>
+    /// <param name="levelData">The level data to create the level.</param>
     public void CreateGame(string levelData)
     {
-        CreatePaddle(new Vector3(0.0f, -4.5f, 0.0f));
-        CreateBall();
-        blockContainer = new GameObject("Blocks");
-        blockContainer.transform.position = new Vector3(0.0f, 3.0f, 0.0f);
-        blocks = new List<Block>();
+        Paddle paddle = CreatePaddle(new Vector3(0.0f, -4.5f, 0.0f));
+
+        CreateBall(paddle);
+
+        CreateBlockContainer(new Vector3(0.0f, 3.0f, 0.0f));
+
         string[] patterns = levelData.Split(new char[] { '\n' });
+        gameBlocks = new List<Block>();
         CreateBlockMatrix(patterns);
     }
 
-    public Ball CreateBall()
+    /// <summary>
+    /// Destroys the game in screen.
+    /// </summary>
+    public void DestroyGame()
     {
-        ball = CreateObjectFromPrefab<Ball>(ballPrefab, Vector3.zero);
-        ball.transform.parent = paddle.transform;
-        ball.transform.localPosition = new Vector3(0.0f, 1.0f, 0.0f);
-        ball.OnBallDestroyed += BallWasDestroyed;
-        return ball;
+        DestroyAllBlocks();
+        DestroyBlockContainer();
+        DestroyBall(gameBall);
+        DestroyPaddle(gamePaddle);
     }
 
+    /// <summary>
+    /// Creates a Ball for the game, and attaches it to a Paddle.
+    /// </summary>
+    /// <param name="paddle">The Paddle component to attach the Ball to.</param>
+    /// <returns>The Ball component of the created GameObject.</returns>
+    public Ball CreateBall(Paddle paddle)
+    {
+        gameBall = CreateObjectFromPrefab<Ball>(ballPrefab, Vector3.zero);
+        gameBall.transform.parent = paddle.transform;
+        gameBall.transform.localPosition = new Vector3(0.0f, 1.0f, 0.0f);
+        gameBall.OnBallDestroyed += BallWasDestroyed;
+        return gameBall;
+    }
+
+    /// <summary>
+    /// Destroys a specific Ball.
+    /// </summary>
+    /// <param name="ball">The Ball component of the GameObject we want to destroy.</param>
     public void DestroyBall(Ball ball)
     {
-        if (this.ball == ball)
+        if (ball != null && gameBall == ball)
         {
-            this.ball = null;
+            gameBall = null;
             DestroyGameObject(ball.gameObject);
         }
     }
 
+    /// <summary>
+    /// Creates a Paddle for the game.
+    /// </summary>
+    /// <param name="position">The position for the Paddle.</param>
+    /// <returns>The Paddle component of the created GameObject.</returns>
     public Paddle CreatePaddle(Vector3 position)
     {
-        paddle = CreateObjectFromPrefab<Paddle>(paddlePrefab, position);
-        return paddle;
+        gamePaddle = CreateObjectFromPrefab<Paddle>(paddlePrefab, position);
+        return gamePaddle;
     }
 
+    /// <summary>
+    /// Destroys a specific Paddle.
+    /// </summary>
+    /// <param name="paddle">The Paddle component of the GameObject we want to destroy.</param>
     public void DestroyPaddle(Paddle paddle)
     {
-        if (this.paddle == paddle)
+        if (paddle != null && gamePaddle == paddle)
         {
-            this.paddle = null;
+            gamePaddle = null;
             DestroyGameObject(paddle.gameObject);
         }
     }
 
+    /// <summary>
+    /// Creates a block for the game.
+    /// </summary>
+    /// <param name="blockID">The block id of the type of block we would like to create</param>
+    /// <param name="position">The position of the block.</param>
+    /// <returns>The Block component of the created Block component.</returns>
     public Block CreateBlock(char blockID, Vector3 position)
     {
         BlockInfo blockInfo = null;
-        if (blockPrefabMap.TryGetValue(blockID, out blockInfo))
+        if (blockPrefabDictionary.TryGetValue(blockID, out blockInfo))
         {
             Block block = CreateObjectFromPrefab<Block>(greyBlockPrefab, position);
-            blocks.Add(block);
+            gameBlocks.Add(block);
             block.spriteRenderer.color = blockInfo.color;
             return block;
         }
         return null;
     }
 
+    /// <summary>
+    /// Destroys a specific Block.
+    /// </summary>
+    /// <param name="block">The Block component of the GameObject we would like to destroy.</param>
     public void DestroyBlock(Block block)
     {
-        if (blocks.Contains(block))
+        if (block != null && gameBlocks.Contains(block))
         {
             block.transform.parent = null;
-            blocks.Remove(block);
+            gameBlocks.Remove(block);
             DestroyGameObject(block.gameObject);
+
+            if (gameBlocks.Count == 0 && OnNoMoreBlocks != null)
+            {
+                OnNoMoreBlocks(this);
+            }
         }
     }
 
@@ -109,11 +219,11 @@ public class GameObjectController: MonoBehaviour
 
     private void SetupBlockPrefabMap()
     {
-        blockPrefabMap = new Dictionary<char, BlockInfo>();
+        blockPrefabDictionary = new Dictionary<char, BlockInfo>();
         for (int i = 0; i < blocksInfo.Length; i++)
         {
             BlockInfo blockInfo = blocksInfo[i];
-            blockPrefabMap[blockInfo.charID] = blockInfo;
+            blockPrefabDictionary[blockInfo.charID] = blockInfo;
         }
     }
 
@@ -146,6 +256,29 @@ public class GameObjectController: MonoBehaviour
         }
     }
 
+    private void DestroyAllBlocks()
+    {
+        Block[] blocksToDestroy = gameBlocks.ToArray();
+        for (int i = 0; i < blocksToDestroy.Length; i++)
+        {
+            DestroyBlock(blocksToDestroy[i]);
+        }
+    }
+
+    private void CreateBlockContainer(Vector3 position)
+    {
+        blockContainer = new GameObject("Blocks");
+        blockContainer.transform.position = position;
+    }
+
+    private void DestroyBlockContainer()
+    {
+        if (blockContainer != null)
+        {
+            GameObject.Destroy(blockContainer);
+        }
+    }
+
     private void BlockWasDestroyed(Block block)
     {
         Toolbox.GameController.AddScore(block.addedScore);
@@ -154,6 +287,7 @@ public class GameObjectController: MonoBehaviour
     private void BallWasDestroyed(Ball ball)
     {
         Toolbox.GameController.SubstractLife();
-        CreateBall();
+        CreateBall(gamePaddle);
     }
+
 }

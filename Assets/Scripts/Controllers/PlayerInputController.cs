@@ -9,18 +9,22 @@ public class PlayerInputController : MonoBehaviour {
     {
         if (playerInput != null)
         {
-            Paddle paddle = Toolbox.GameObjectController.paddle;
+            Paddle paddle = Toolbox.GameObjectController.gamePaddle;
             if (paddle != null)
             {
                 UpdatePaddlePosition(paddle, playerInput);
 
-                Ball ball = Toolbox.GameObjectController.ball;
+                Ball ball = Toolbox.GameObjectController.gameBall;
                 if (playerInput.ActionButton && ball != null && !ball.isOnPlay)
                 {
                     ball.Launch(paddle.launchSpeed);
                 }
             }
             
+            if (playerInput.PauseButton)
+            {
+
+            }
         }
     }
 
