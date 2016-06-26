@@ -3,7 +3,7 @@ using UnityEditor;
 
 public class LevelInfoEditor : MonoBehaviour {
 
-    private static string DefaultLevelName = "NewLevel.lvl";
+    private static string DefaultLevelName = "NewLevel.asset";
 
     [MenuItem("Assets/Create/Level")]
     public static void CreateMyAsset()
@@ -13,7 +13,7 @@ public class LevelInfoEditor : MonoBehaviour {
         {
             AssetDatabase.CreateFolder("Assets", "Levels");
         }
-        AssetDatabase.CreateAsset(asset, "Assets/Levels/NewLevel.asset");
+        AssetDatabase.CreateAsset(asset, "Assets/Levels/"+ DefaultLevelName);
         AssetDatabase.SaveAssets();
         EditorUtility.FocusProjectWindow();
         Selection.activeObject = asset;
