@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public delegate void GameControlEvent(GameController gameControl);
+public delegate void GameControlEvent(GameController gameController);
 
 public class GameController : MonoBehaviour {
 

@@ -23,7 +23,7 @@ public class PlayerInputController : MonoBehaviour {
             
             if (playerInput.PauseButtonPressed)
             {
-
+                Toolbox.GameController.PauseGame();
             }
         }
     }
