@@ -35,6 +35,12 @@ public class Paddle: MonoBehaviour {
     public float launchSpeed = 7.0f;
 
     /// <summary>
+    /// This factor controls the direction in which the ball bounces relative to the center of the Paddle.
+    /// A value of 0 means the ball always bounces up.
+    /// </summary>
+    public float bounceCorrectFactor = 0.5f;
+
+    /// <summary>
     /// The move area this component's GameObject is allowed to move in.
     /// The area is highlighted when the paddle is selected in the editor.
     /// </summary>
@@ -48,6 +54,7 @@ public class Paddle: MonoBehaviour {
             if (rigidBody2D != null)
             {
                 Vector3 newDirection = collision.gameObject.transform.position - gameObject.transform.position;
+                newDirection.x = newDirection.x * bounceCorrectFactor;
                 newDirection.z = 0.0f;
                 rigidBody2D.velocity = newDirection.normalized * launchSpeed;
             }

@@ -25,8 +25,7 @@
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class TouchScreenPlayerInput : PlayerInput
-{
+public class TouchScreenPlayerInput : PlayerInput {
 
     /// <summary>
     /// The expected horizontal speed in units by second.
