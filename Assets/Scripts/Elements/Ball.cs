@@ -31,6 +31,14 @@ using UnityEngine;
 /// </summary>
 public class Ball : MonoBehaviour, PoolableComponent {
 
+    enum BounceSide
+    {
+        Right,
+        Top,
+        Left,
+        Bottom
+    }
+
     /// <summary>
     /// The GameObject tag that all Ball elements should have.
     /// </summary>
@@ -42,28 +50,45 @@ public class Ball : MonoBehaviour, PoolableComponent {
     public bool isOnPlay { get; private set; }
     
     private Rigidbody2D rigidBody2D = null;
+    private bool destroyedABlock = false;
 
     void Awake()
     {
         this.rigidBody2D = GetComponent<Rigidbody2D>();
     }
 
-    void OnCollisionEnter2D(Collision2D collision)
+    void FixedUpdate()
     {
-        if (collision.gameObject.tag == Block.Tag)
+        destroyedABlock = false;
+    }
+
+    void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (!destroyedABlock && collision.gameObject.tag == Block.Tag)
         {
             Block block = collision.gameObject.GetComponent<Block>();
+            DidHitBlock(block, collision);
+
             GameObjectController gameObjectController = Toolbox.GameObjectController;
             GameController gameController = Toolbox.GameController;
-
             gameObjectController.DestroyBlock(block);
             gameController.AddPoints(block.points);
             if (gameObjectController.gameBlocks.Count == 0)
             {
                 gameController.GoToNextLevel();
             }
+            destroyedABlock = true;
         }
     }
+
+    /*void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.tag == Block.Tag)
+        {
+            Block block = collision.gameObject.GetComponent<Block>();
+            DidHitBlock(block, null);
+        }
+    }*/
 
     /// <summary>
     /// Launches the ball in a 45 degree angle with a specific speed.
@@ -75,6 +100,55 @@ public class Ball : MonoBehaviour, PoolableComponent {
         Vector3 direction = new Vector3(1.0f, 1.0f, 0.0f);
         rigidBody2D.velocity = direction.normalized * speed;
         isOnPlay = true;
+    }
+
+    private BounceSide BounceSideForAngle(float angle)
+    {
+        float calcAngle = 26.565051177143886f;
+        if (angle < -calcAngle)
+            angle += 360.0f;
+        else if (angle > 360.0f - calcAngle)
+            angle -= 360.0f;
+
+        angle -= calcAngle * 2;
+        if (angle < 0.0f)
+        {
+            return BounceSide.Right;
+        }
+
+        angle -= 360.0f - calcAngle - calcAngle;
+        if (angle < 0.0f)
+        {
+            return BounceSide.Top;
+        }
+
+        angle -= calcAngle * 2;
+        if (angle < 0.0f)
+        {
+            return BounceSide.Left;
+        }
+
+        return BounceSide.Bottom;
+    }
+
+    private void DidHitBlock(Block block, Collider2D collider2D)
+    {
+        Vector3 angleVector = transform.position - block.transform.position;
+        float angle = Mathf.Atan2(angleVector.y, angleVector.x) * Mathf.Rad2Deg;
+        Vector3 velocity = rigidBody2D.velocity;
+        switch (BounceSideForAngle(angle))
+        {
+            case BounceSide.Left:
+            case BounceSide.Right:
+                velocity.x = -velocity.x;
+                break;
+            case BounceSide.Bottom:
+            case BounceSide.Top:
+                velocity.y = -velocity.y;
+                break;
+        }
+        rigidBody2D.velocity = velocity;
+        Debug.Log("ANGLE " + angle);
     }
 
     // PoolableObject implementation
