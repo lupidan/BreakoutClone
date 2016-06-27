@@ -57,6 +57,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   launchSpeed: 10
+  bounceCorrectFactor: 0.4
   moveArea:
     serializedVersion: 2
     x: -4
