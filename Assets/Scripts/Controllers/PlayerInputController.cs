@@ -60,12 +60,6 @@ public class PlayerInputController : MonoBehaviour {
             }
             CheckAndPauseGame(playerInput);
         }
-
-        //DEBUG:
-        if (Input.GetKeyDown(KeyCode.N))
-        {
-            Toolbox.GameController.GoToNextLevel();
-        }
     }
 
     private void UpdatePaddlePosition(Paddle paddle, PlayerInput playerInput)

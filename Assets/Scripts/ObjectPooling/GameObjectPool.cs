@@ -25,7 +25,6 @@
 using UnityEngine;
 using System.Collections.Generic;
 
-
 /// <summary>
 /// The PoolableComponent interface defines a behaviour to be implemented by GameObject components when they need to interact with a GameObjectPool.
 /// A component does not require to implement this protocol in order to work with a GameObjectPool.
