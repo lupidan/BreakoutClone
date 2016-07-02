@@ -9,8 +9,15 @@ namespace Game
 
         public void CollidedWithBall(Ball ball)
         {
-            ball.Destroy();
-            gameController.SubstractLife();
+            if (ball != null)
+            {
+                ball.Destroy();
+            }
+
+            if (gameController != null)
+            {
+                gameController.SubstractLife();
+            }
         }
 
     }
