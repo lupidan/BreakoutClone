@@ -18,7 +18,10 @@ namespace Game
         T CreateGameObjectFromPrefab<T>(GameObject prefab, Vector3 position);
     }
 
-    
+    public interface ColorTintable
+    {
+        Color TintColor { get; set; }
+    }
 
 }
 
