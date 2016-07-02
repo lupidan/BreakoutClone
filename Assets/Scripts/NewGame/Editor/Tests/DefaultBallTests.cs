@@ -50,7 +50,7 @@ namespace Game
         }
 
         [Test]
-        public void TestLaunchingWith0SpeedMustSetVectorToZero()
+        public void TestLaunchWith0SpeedMustSetVectorToZero()
         {
             Positionable mockPositionable = Substitute.For<Positionable>();
             ball.positionable = mockPositionable;
@@ -174,6 +174,23 @@ namespace Game
 
             ball.CollidedWithBlock(mockBlock);
             mockController.DidNotReceive().GoToNextLevel();
+        }
+
+        [Test]
+        public void TestDestroyDoesNotThrowAnExceptionIfDestroyableIsNull()
+        {
+            ball.destroyable = null;
+            ball.Destroy();
+        }
+
+        [Test]
+        public void TestDestroyCallsDestroyableDestroy()
+        {
+            Destroyable mockDestroyable = Substitute.For<Destroyable>();
+            ball.destroyable = mockDestroyable;
+            ball.Destroy();
+
+            mockDestroyable.Received().Destroy();
         }
 
         private float AngleForVector(Vector2 vector)

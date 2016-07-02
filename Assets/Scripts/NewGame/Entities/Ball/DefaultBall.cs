@@ -49,7 +49,10 @@ namespace Game
 
         public void Destroy()
         {
-            destroyable.Destroy();
+            if (destroyable != null)
+            {
+                destroyable.Destroy();
+            }
         }
 
     }
