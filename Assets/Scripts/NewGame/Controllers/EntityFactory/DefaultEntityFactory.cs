@@ -34,18 +34,18 @@ namespace Game
 
         private Dictionary<char, BlockInfo> blockInfoDictionary = new Dictionary<char, BlockInfo>();
 
-        public GameEntity gameEntity;
+        public ObjectCreatable objectCreatable;
         #endregion
 
         #region EntityFactory implementation
         public Paddle CreatePaddle(Vector3 position)
         {
-            return gameEntity.CreateGameObjectFromPrefab<Paddle>(paddlePrefab, position);
+            return objectCreatable.CreateGameObjectFromPrefab<Paddle>(paddlePrefab, position);
         }
 
         public Ball CreateBall(Vector3 position)
         {
-            return gameEntity.CreateGameObjectFromPrefab<Ball>(paddlePrefab, position);
+            return objectCreatable.CreateGameObjectFromPrefab<Ball>(paddlePrefab, position);
         }
 
         public BlockInfo BlockInfoForCharID(char charID)
@@ -57,7 +57,7 @@ namespace Game
 
         public Block CreateBlock(BlockInfo blockInfo, Vector3 position)
         {
-            return gameEntity.CreateGameObjectFromPrefab<Block>(paddlePrefab, position);
+            return objectCreatable.CreateGameObjectFromPrefab<Block>(paddlePrefab, position);
         }
         #endregion
 

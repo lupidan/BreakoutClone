@@ -13,7 +13,7 @@ namespace Game
         [SerializeField]
         private float bounceCorrectFactor = 0.4f;
 
-        public GameEntity gameEntity;
+        public Destroyable destroyable;
         
 
         public float LaunchSpeed { get { return launchSpeed; } }
@@ -28,7 +28,7 @@ namespace Game
 
         public void Destroy()
         {
-            gameEntity.Destroy();
+            destroyable.Destroy();
         }
 
         //TODO: Movign

@@ -7,13 +7,13 @@ namespace Game
     {
         [SerializeField]
         private int points = 100;
-        public GameEntity gameEntity;
+        public Destroyable destroyable;
 
         public int Points { get { return points; } }
 
         public void Destroy()
         {
-            gameEntity.Destroy();
+            destroyable.Destroy();
         }
 
     }

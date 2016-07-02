@@ -2,20 +2,27 @@
 
 namespace Game
 {
-    public class BallComponent : MonoBehaviour, PoolableComponent
+    public class BallComponent : MonoBehaviour, Positionable, Destroyable, PoolableComponent 
     {
+
         /// <summary>
         /// The GameObject tag that all Ball elements should have.
         /// </summary>
         public static string Tag = "Ball";
 
+        /// <summary>
+        /// The ball instance being handled by this component.
+        /// </summary>
         public DefaultBall ball = new DefaultBall();
 
         private Rigidbody2D rigidBody2D = null;
 
+        #region Monobehaviour
         void Awake()
         {
-            this.rigidBody2D = GetComponent<Rigidbody2D>();
+            rigidBody2D = GetComponent<Rigidbody2D>();
+            ball.destroyable = this;
+            ball.positionable = this;
         }
 
         void OnCollisionEnter2D(Collision2D collision)
@@ -27,8 +34,21 @@ namespace Game
                 ball.CollidedWithBlock(block);
             }
         }
+        #endregion
 
-        // PoolableObject implementation
+        #region Positionable implementation
+        public Vector3 Position { get { return transform.position; } set { transform.position = value; } }
+        public Vector2 Velocity { get { return rigidBody2D.velocity; } set { rigidBody2D.velocity = value; } }
+        #endregion
+
+        #region Destroyable implementation
+        public void Destroy()
+        {
+            Destroy(gameObject);
+        }
+        #endregion
+
+        #region PoolableObject implementation
         public void OnSpawn()
         {
             ball.Reset();
@@ -38,6 +58,7 @@ namespace Game
         {
             
         }
+        #endregion
     }
 }
 

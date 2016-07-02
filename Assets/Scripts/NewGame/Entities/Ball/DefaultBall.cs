@@ -6,7 +6,9 @@ namespace Game
     public class DefaultBall : Ball
     {
         public GameController gameController;
-        public GameEntity gameEntity;
+        public Destroyable destroyable;
+        public Positionable positionable;
+
         [SerializeField]
         private bool isOnPlay = false;
 
@@ -15,28 +17,39 @@ namespace Game
         public void Reset()
         {
             isOnPlay = false;
+            if (positionable != null)
+            {
+                positionable.Velocity = Vector2.zero;
+            }
         }
 
         public void Launch(float angle, float speed)
         {
-            float radians = angle * Mathf.Deg2Rad;
-            Vector3 directionVector = new Vector3(Mathf.Cos(radians), Mathf.Sin(radians), 0.0f).normalized;
-            gameEntity.Velocity = directionVector * speed;
+            isOnPlay = true;
+            if (positionable != null)
+            {
+                float radians = angle * Mathf.Deg2Rad;
+                Vector3 directionVector = new Vector3(Mathf.Cos(radians), Mathf.Sin(radians), 0.0f).normalized;
+                positionable.Velocity = directionVector * speed;
+            }
         }
 
         public void CollidedWithBlock(Block block)
         {
-            gameController.AddPoints(block.Points);
-            block.Destroy();
-            if (gameController.AreAllBlocksDestroyed)
+            if ((block != null) && (gameController != null))
             {
-                gameController.GoToNextLevel();
+                block.Destroy();
+                gameController.AddPoints(block.Points);
+                if (gameController.AreAllBlocksDestroyed)
+                {
+                    gameController.GoToNextLevel();
+                }
             }
         }
 
         public void Destroy()
         {
-            gameEntity.Destroy();
+            destroyable.Destroy();
         }
 
     }
