@@ -29,7 +29,7 @@ namespace Game
     /// <summary>
     /// A block component represents a Unity GameObject component for block objects.
     /// </summary>
-    public class BlockComponent : MonoBehaviour, Destroyable, ColorTintable
+    public class BlockComponent : MonoBehaviour
     {
         /// <summary>
         /// The GameObject tag that all Block elements should have.
@@ -41,26 +41,13 @@ namespace Game
         /// </summary>
         public DefaultBlock block = new DefaultBlock();
 
-        private SpriteRenderer spriteRenderer;
-
         #region MonoBehaviour
         void Awake()
         {
-            spriteRenderer = GetComponent<SpriteRenderer>();
-            block.destroyable = this;
-            block.colorTintable = this;
+            block.Positionable = new GameObjectPositioner(this.gameObject);
+            block.ColorTintable = new SpriteRendererColorTinter(this.gameObject);
+            block.Eliminable = new GameObjectEliminator(this.gameObject);
         }
-        #endregion
-
-        #region Destroyable implementation
-        public void Destroy()
-        {
-            Destroy(gameObject);
-        }
-        #endregion
-
-        #region ColorTintable implementation
-        public Color TintColor { get { return spriteRenderer.color; } set { spriteRenderer.color = value; } }
         #endregion
 
     }

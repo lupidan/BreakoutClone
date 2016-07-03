@@ -32,29 +32,14 @@ namespace Game
     [System.Serializable]
     public class DefaultBlock : Block
     {
-        /// <summary>
-        /// The object able to destroy game objects.
-        /// </summary>
-        public Destroyable destroyable;
-
-        /// <summary>
-        /// The object able to change the tint color of the block.
-        /// </summary>
-        public ColorTintable colorTintable;
-
         [SerializeField]
         private int points = 100;
 
         #region Block implementation
         public int Points { get { return points; } }
-
-        public void Destroy()
-        {
-            if (destroyable != null)
-            {
-                destroyable.Destroy();
-            }
-        }
+        public Positionable Positionable { get; set; }
+        public ColorTintable ColorTintable { get; set; }
+        public Eliminable Eliminable { get; set; }
         #endregion
 
     }

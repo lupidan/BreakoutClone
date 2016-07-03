@@ -30,14 +30,24 @@ namespace Game
     public interface Block
     {
         /// <summary>
+        /// The object able to change the position of the block.
+        /// </summary>
+        Positionable Positionable { get; }
+
+        /// <summary>
+        /// The object able to change the tint color of the block.
+        /// </summary>
+        ColorTintable ColorTintable { get; }
+
+        /// <summary>
+        /// The object able to destroy game objects.
+        /// </summary>
+        Eliminable Eliminable { get; }
+
+        /// <summary>
         /// The number of points provided by the block when eliminated.
         /// </summary>
         int Points { get; }
-
-        /// <summary>
-        /// Destroys the block.
-        /// </summary>
-        void Destroy();
     }
 }
 

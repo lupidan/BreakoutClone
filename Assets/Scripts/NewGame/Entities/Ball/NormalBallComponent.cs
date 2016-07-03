@@ -2,9 +2,11 @@
 
 namespace Game
 {
-    public class BallComponent : MonoBehaviour, Positionable, Destroyable, PoolableComponent 
+    /// <summary>
+    /// A Normal Ball component represents a Unity GameObject that manages a normal ball instance.
+    /// </summary>
+    public class NormalBallComponent : MonoBehaviour
     {
-
         /// <summary>
         /// The GameObject tag that all Ball elements should have.
         /// </summary>
@@ -13,16 +15,14 @@ namespace Game
         /// <summary>
         /// The ball instance being handled by this component.
         /// </summary>
-        public DefaultBall ball = new DefaultBall();
-
-        private Rigidbody2D rigidBody2D = null;
+        public NormalBall ball = new NormalBall();
 
         #region Monobehaviour
         void Awake()
         {
-            rigidBody2D = GetComponent<Rigidbody2D>();
-            ball.destroyable = this;
-            ball.positionable = this;
+            ball.Positionable = new GameObjectPositioner(this.gameObject);
+            ball.Speedable = new Rigidbody2DSpeeder(this.gameObject);
+            ball.Eliminable = new GameObjectEliminator(this.gameObject);
         }
 
         void OnCollisionEnter2D(Collision2D collision)
@@ -30,21 +30,8 @@ namespace Game
             if (collision.gameObject.tag == BlockComponent.Tag)
             {
                 BlockComponent blockComponent = collision.gameObject.GetComponent<BlockComponent>();
-                DefaultBlock block = blockComponent.block;
-                ball.CollidedWithBlock(block);
+                ball.CollidedWithBlock(blockComponent.block);
             }
-        }
-        #endregion
-
-        #region Positionable implementation
-        public Vector3 Position { get { return transform.position; } set { transform.position = value; } }
-        public Vector2 Velocity { get { return rigidBody2D.velocity; } set { rigidBody2D.velocity = value; } }
-        #endregion
-
-        #region Destroyable implementation
-        public void Destroy()
-        {
-            Destroy(gameObject);
         }
         #endregion
 
