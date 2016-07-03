@@ -80,7 +80,21 @@ namespace Game
                 gameObject.transform.position = newPosition;
             }
         }
+
+        public float ZPosition
+        {
+            get
+            {
+                return gameObject.transform.position.z;
+            }
+            set
+            {
+                Vector3 newPosition = gameObject.transform.position;
+                newPosition.z = value;
+                gameObject.transform.position = newPosition;
+            }
+        }
         #endregion
-        
+
     }
 }

@@ -45,5 +45,10 @@ namespace Game
         /// The Y coordinate of the object's position.
         /// </summary>
         float YPosition { get; set; }
+
+        /// <summary>
+        /// The Z coordinate of the object's position.
+        /// </summary>
+        float ZPosition { get; set; }
     }
 }
