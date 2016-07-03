@@ -35,7 +35,7 @@ namespace Game
         /// <summary>
         /// The game controller to communicate with.
         /// </summary>
-        GameController gameController;
+        public GameController gameController;
 
         [SerializeField]
         private bool isOnPlay = false;
@@ -68,7 +68,7 @@ namespace Game
 
         public void CollidedWith(Block block)
         {
-            if ((block != null) && (gameController != null))
+            if ((block != null) && (block.Eliminable != null) && (gameController != null))
             {
                 block.Eliminable.Eliminate();
                 gameController.AddPoints(block.Points);

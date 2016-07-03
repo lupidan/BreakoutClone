@@ -4,7 +4,7 @@ using NSubstitute;
 
 namespace Game
 {
-    [TestFixture]
+    /*[TestFixture]
     public class DefaultDeadZoneTests
     {
         private DefaultDeadZone deadZone;
@@ -59,6 +59,6 @@ namespace Game
 
             mockController.Received().SubstractLife();
         }
-    }
+    }*/
 }
 
