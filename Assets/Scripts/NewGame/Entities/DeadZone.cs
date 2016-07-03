@@ -27,15 +27,15 @@ namespace Game
     /// <summary>
     /// A standard implementation of a DeadZone. When a collision is detected, it eliminates the ball and substracts a life.
     /// </summary>
-    public class DefaultDeadZone : DeadZone {
+    public class DeadZone : Collisionable<Ball> {
 
         /// <summary>
         /// The game controller this dead zone has to communicate with.
         /// </summary>
         public GameController gameController;
 
-        #region DeadZone implementation
-        public void CollidedWithBall(Ball ball)
+        #region Collisionable implementation
+        public void CollidedWith(Ball ball)
         {
             if (ball != null)
             {

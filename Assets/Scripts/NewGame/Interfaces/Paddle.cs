@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Game
 {
-    public interface Paddle
+    public interface Paddle : Collisionable<Ball>
     {
         /// <summary>
         /// The speed the ball is bounced up when colliding with the paddle, or when it's first launched.
@@ -16,10 +16,6 @@ namespace Game
         /// The move area this component's GameObject is allowed to move in.
         /// </summary>
         Rect MoveArea { get; }
-
-        void CollidedWithBall(Ball ball);
-
-        void Destroy();
     }
 }
 

@@ -25,9 +25,10 @@
 namespace Game
 {
     /// <summary>
-    /// A Ball represents a ball object in the game. It contains methods to be launched and reset, as well as providing methods for collision with other elements.
+    /// A Ball represents a ball object in the game. It contains methods to be launched and reset.
+    /// A Ball should also be able to collide with blocks.
     /// </summary>
-    public interface Ball
+    public interface Ball : Collisionable<Block>
     {
         /// <summary>
         /// The object able to position the ball on the game scene.
@@ -60,12 +61,6 @@ namespace Game
         /// <param name="angle">The angle to launch the ball.</param>
         /// <param name="speed">The speed to launch the ball.</param>
         void Launch(float angle, float speed);
-
-        /// <summary>
-        /// Method called when the ball collides with a block.
-        /// </summary>
-        /// <param name="block">The block that collided with the ball.</param>
-        void CollidedWithBlock(Block block);
 
     }
 }

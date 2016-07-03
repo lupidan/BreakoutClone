@@ -25,15 +25,16 @@
 namespace Game
 {
     /// <summary>
-    /// A DeadZone defines an dead area that can collide with a ball to loose a life.
+    /// Protocol describing the ability to collide with another type of object.
     /// </summary>
-    public interface DeadZone {
-
+    /// <typeparam name="T">The type of object we want to be able to collide with.</typeparam>
+    public interface Collisionable<T>
+    {
         /// <summary>
-        /// Called when a collision with a ball is detected.
+        /// Method called when a collision with other object takes place.
         /// </summary>
-        /// <param name="ball">The ball object this instance collided with.</param>
-        void CollidedWithBall(Ball ball);
+        /// <param name="other">The object we collided with.</param>
+        void CollidedWith(T other);
     }
 }
 

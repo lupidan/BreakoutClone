@@ -66,7 +66,7 @@ namespace Game
             }
         }
 
-        public void CollidedWithBlock(Block block)
+        public void CollidedWith(Block block)
         {
             if ((block != null) && (gameController != null))
             {
