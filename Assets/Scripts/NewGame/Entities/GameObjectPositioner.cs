@@ -27,49 +27,60 @@ using UnityEngine;
 namespace Game
 {
     /// <summary>
-    /// A Normal Ball component represents a Unity GameObject that manages a normal ball instance.
+    /// A GameObjectPositioner is a dedicated Positionable instance for Unity GameObjects
     /// </summary>
-    public class NormalBallComponent : MonoBehaviour
+    public class GameObjectPositioner : Positionable
     {
-        /// <summary>
-        /// The GameObject tag that all Ball elements should have.
-        /// </summary>
-        public static string Tag = "Ball";
+        private GameObject gameObject = null;
 
         /// <summary>
-        /// The ball instance being handled by this component.
+        /// Creates a GameObjectPositioner for a specific GameObject.
         /// </summary>
-        public NormalBall ball = new NormalBall();
-
-        #region Monobehaviour
-        void Awake()
+        /// <param name="gameObject">The GameObject to use by the created GameObjectPositioner.</param>
+        public GameObjectPositioner(GameObject gameObject)
         {
-            ball.Positionable = new GameObjectPositioner(this.gameObject);
-            ball.Speedable = new Rigidbody2DSpeeder(this.gameObject);
-            ball.Eliminable = new GameObjectEliminator(this.gameObject);
+            this.gameObject = gameObject;
         }
 
-        void OnCollisionEnter2D(Collision2D collision)
-        {
-            if (collision.gameObject.tag == NormalBlockComponent.Tag)
+        #region Positionable implementation
+        public Vector3 Position {
+            get
             {
-                NormalBlockComponent blockComponent = collision.gameObject.GetComponent<NormalBlockComponent>();
-                ball.CollidedWith(blockComponent.block);
+                return gameObject.transform.position;
+            }
+            set
+            { gameObject.transform.position = value;
+            }
+        }
+
+        public float XPosition
+        {
+            get
+            {
+                return gameObject.transform.position.x;
+            }
+            set
+            {
+                Vector3 newPosition = gameObject.transform.position;
+                newPosition.x = value;
+                gameObject.transform.position = newPosition;
+            }
+        }
+
+        public float YPosition
+        {
+            get
+            {
+                return gameObject.transform.position.y;
+            }
+            set
+            {
+                Vector3 newPosition = gameObject.transform.position;
+                newPosition.y = value;
+                gameObject.transform.position = newPosition;
             }
         }
         #endregion
-
-        #region PoolableObject implementation
-        public void OnSpawn()
-        {
-            ball.Reset();
-        }
-
-        public void OnDespawn()
-        {
-            
-        }
-        #endregion
+        
     }
 }
-

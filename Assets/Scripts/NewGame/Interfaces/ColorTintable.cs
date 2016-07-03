@@ -27,7 +27,7 @@ using UnityEngine;
 namespace Game
 {
     /// <summary>
-    /// Protocol describing the ability to get tinted by a specific color.
+    /// Protocol describing the ability of an object to get tinted by a specific color.
     /// </summary>
     public interface ColorTintable
     {

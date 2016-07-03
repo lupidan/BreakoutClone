@@ -27,32 +27,38 @@ using UnityEngine;
 namespace Game
 {
     /// <summary>
-    /// A DeadZone component defines a behaviour for a Ball GameObjects destruction area.
-    /// It requires one or more Collider2D masks set as triggers to interact with Ball elements.
+    /// A Rigidbody2DSpeeder is a dedicated Speedable object for Unity Rigidbody2D instances. 
     /// </summary>
-    public class DeadZoneComponent : MonoBehaviour
+    public class Rigidbody2DSpeeder : Speedable
     {
-        /// <summary>
-        /// The standard dead zone this object is managing.
-        /// </summary>
-        public DeadZone deadZone = new DeadZone();
+        private Rigidbody2D rigidbody2D = null;
 
-        #region MonoBehaviour
-        void Awake()
+        /// <summary>
+        /// Convenience method to create a Rigidbody2DSpeeder instance for a Unity GameObject.
+        /// </summary>
+        /// <param name="gameObject">The GameObject to create the Rigidbody2DSpeeder for.</param>
+        public Rigidbody2DSpeeder(GameObject gameObject) : this(gameObject.GetComponent<Rigidbody2D>()) { }
+
+        /// <summary>
+        /// Creates a Rigidbody2DSpeeder for a Unity Rigidbody2D.
+        /// </summary>
+        /// <param name="rigidBody2D">The Rigidbody2D to use by the created Rigidbody2DSpeeder.</param>
+        public Rigidbody2DSpeeder(Rigidbody2D rigidBody2D)
         {
-            deadZone.gameController = null;
+            this.rigidbody2D = rigidBody2D;
         }
 
-        void OnTriggerEnter2D(Collider2D collider)
-        {
-            if (collider.gameObject.tag == NormalBallComponent.Tag)
+        #region Speedable implementation
+        public Vector2 Velocity {
+            get
             {
-                NormalBallComponent ballComponent = collider.gameObject.GetComponent<NormalBallComponent>();
-                deadZone.CollidedWith(ballComponent.ball);
+                return rigidbody2D.velocity;
+            }
+            set
+            {
+                rigidbody2D.velocity = value;
             }
         }
         #endregion
-
     }
 }
-

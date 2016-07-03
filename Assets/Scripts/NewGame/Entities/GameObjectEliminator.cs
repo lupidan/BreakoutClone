@@ -27,32 +27,28 @@ using UnityEngine;
 namespace Game
 {
     /// <summary>
-    /// A DeadZone component defines a behaviour for a Ball GameObjects destruction area.
-    /// It requires one or more Collider2D masks set as triggers to interact with Ball elements.
+    /// A GameObjectEliminator is an dedicated Eliminable object for Unity GameObjects.
+    /// This eliminator destroys completely the GameObject.
     /// </summary>
-    public class DeadZoneComponent : MonoBehaviour
+    public class GameObjectEliminator : Eliminable
     {
-        /// <summary>
-        /// The standard dead zone this object is managing.
-        /// </summary>
-        public DeadZone deadZone = new DeadZone();
+        private GameObject gameObject = null;
 
-        #region MonoBehaviour
-        void Awake()
+        /// <summary>
+        /// Creates a GameObjectEliminator for a specific GameObject.
+        /// </summary>
+        /// <param name="gameObject">The gameObject to use by the created GameObjectEliminator.</param>
+        public GameObjectEliminator(GameObject gameObject)
         {
-            deadZone.gameController = null;
+            this.gameObject = gameObject;
         }
 
-        void OnTriggerEnter2D(Collider2D collider)
+        #region Eliminable implementation
+        public void Eliminate()
         {
-            if (collider.gameObject.tag == NormalBallComponent.Tag)
-            {
-                NormalBallComponent ballComponent = collider.gameObject.GetComponent<NormalBallComponent>();
-                deadZone.CollidedWith(ballComponent.ball);
-            }
+            GameObject.Destroy(gameObject);
         }
         #endregion
-
     }
 }
 

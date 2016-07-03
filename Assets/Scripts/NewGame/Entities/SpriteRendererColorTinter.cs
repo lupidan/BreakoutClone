@@ -27,32 +27,39 @@ using UnityEngine;
 namespace Game
 {
     /// <summary>
-    /// A DeadZone component defines a behaviour for a Ball GameObjects destruction area.
-    /// It requires one or more Collider2D masks set as triggers to interact with Ball elements.
+    /// A SpriteRendererColorTinter is a dedicated ColorTintable object to work with Unity SpriteRenderer components.
     /// </summary>
-    public class DeadZoneComponent : MonoBehaviour
+    public class SpriteRendererColorTinter : ColorTintable
     {
-        /// <summary>
-        /// The standard dead zone this object is managing.
-        /// </summary>
-        public DeadZone deadZone = new DeadZone();
+        private SpriteRenderer spriteRenderer = null;
 
-        #region MonoBehaviour
-        void Awake()
+        /// <summary>
+        /// Convenience method to create a SpriteRendererColorTinter instance for a Unity GameObject.
+        /// </summary>
+        /// <param name="gameObject">The GameObject to create the SpriteRendererColorTinter for.</param>
+        public SpriteRendererColorTinter(GameObject gameObject) : this(gameObject.GetComponent<SpriteRenderer>()) { }
+
+        /// <summary>
+        /// Creates a SpriteRendererColorTinter for a Unity SpriteRenderer.
+        /// </summary>
+        /// <param name="spriteRenderer">The SpriteRenderer to use by the created SpriteRendererColorTinter.</param>
+        public SpriteRendererColorTinter(SpriteRenderer spriteRenderer)
         {
-            deadZone.gameController = null;
+            this.spriteRenderer = spriteRenderer;
         }
 
-        void OnTriggerEnter2D(Collider2D collider)
+        #region ColorTintable implementation
+        public Color TintColor
         {
-            if (collider.gameObject.tag == NormalBallComponent.Tag)
+            get
             {
-                NormalBallComponent ballComponent = collider.gameObject.GetComponent<NormalBallComponent>();
-                deadZone.CollidedWith(ballComponent.ball);
+                return spriteRenderer.color;
+            }
+            set
+            {
+                spriteRenderer.color = value;
             }
         }
         #endregion
-
     }
 }
-
