@@ -25,16 +25,13 @@
 namespace Game
 {
     /// <summary>
-    /// Protocol describing the ability of an object to collide with another type of object.
+    /// Protocol describing the ability of an object to be eliminated. This doesn't necesarily mean the object is destroyed.
     /// </summary>
-    /// <typeparam name="T">The type of object we want to be able to collide with.</typeparam>
-    public interface Collisionable<T>
+    public interface Eliminable
     {
         /// <summary>
-        /// Method called when a collision with other object takes place.
+        /// Called to eliminate the object
         /// </summary>
-        /// <param name="other">The object we collided with.</param>
-        void CollidedWith(T other);
+        void Eliminate();
     }
 }
-

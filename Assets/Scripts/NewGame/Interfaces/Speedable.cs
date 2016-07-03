@@ -22,19 +22,18 @@
 /// SOFTWARE.
 ///
 
+using UnityEngine;
+
 namespace Game
 {
     /// <summary>
-    /// Protocol describing the ability of an object to collide with another type of object.
+    /// A protocol describing the ability of an object to be speeded and moved by a specific velocity.
     /// </summary>
-    /// <typeparam name="T">The type of object we want to be able to collide with.</typeparam>
-    public interface Collisionable<T>
+    public interface Speedable
     {
         /// <summary>
-        /// Method called when a collision with other object takes place.
+        /// The velocity vector the object should move by second.
         /// </summary>
-        /// <param name="other">The object we collided with.</param>
-        void CollidedWith(T other);
+        Vector2 Velocity { get; set; }
     }
 }
-

@@ -22,19 +22,28 @@
 /// SOFTWARE.
 ///
 
+using UnityEngine;
+
 namespace Game
 {
     /// <summary>
-    /// Protocol describing the ability of an object to collide with another type of object.
+    /// A protocol describing the ability of an object to be positioned in the game world.
     /// </summary>
-    /// <typeparam name="T">The type of object we want to be able to collide with.</typeparam>
-    public interface Collisionable<T>
+    public interface Positionable
     {
         /// <summary>
-        /// Method called when a collision with other object takes place.
+        /// The position of the object.
         /// </summary>
-        /// <param name="other">The object we collided with.</param>
-        void CollidedWith(T other);
+        Vector3 Position { get; set; }
+
+        /// <summary>
+        /// The X coordinate of the object's position.
+        /// </summary>
+        float XPosition { get; set; }
+
+        /// <summary>
+        /// The Y coordinate of the object's position.
+        /// </summary>
+        float YPosition { get; set; }
     }
 }
-

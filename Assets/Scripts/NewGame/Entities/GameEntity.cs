@@ -3,16 +3,6 @@
 namespace Game
 {
 
-    /// <summary>
-    /// A Positionable object can be set a Position in the world.
-    /// </summary>
-    public interface Positionable
-    {
-        Vector3 Position { get; set; }
-        float XPosition { get; set; }
-        float YPosition { get; set; }
-    }
-
     public class GameObjectPositioner : Positionable
     {
         public Vector3 Position { get { return gameObject.transform.position; } set { gameObject.transform.position = value; } }
@@ -52,13 +42,7 @@ namespace Game
         }
     }
 
-    /// <summary>
-    /// A Speedable object can be moved by setting a Velocity.
-    /// </summary>
-    public interface Speedable
-    {
-        Vector2 Velocity { get; set; }
-    }
+    
 
     public class Rigidbody2DSpeeder : Speedable
     {
@@ -74,13 +58,7 @@ namespace Game
         }
     }
 
-    /// <summary>
-    /// A Eliminable object can be eliminated from the game scene. This doesn't necesarily mean the object is destroyed.
-    /// </summary>
-    public interface Eliminable
-    {
-        void Eliminate();
-    }
+    
 
     public class GameObjectEliminator : Eliminable
     {
@@ -97,13 +75,7 @@ namespace Game
         }
     }
 
-    /// <summary>
-    /// A ColorTintable object is able to change the tint color being displayed.
-    /// </summary>
-    public interface ColorTintable
-    {
-        Color TintColor { get; set; }
-    }
+    
 
     public class SpriteRendererColorTinter : ColorTintable
     {
@@ -118,13 +90,7 @@ namespace Game
         }
     }
 
-    /// <summary>
-    /// A ObjectCreatable object is able to create new objects.
-    /// </summary>
-    public interface ObjectCreatable
-    {
-        T CreateGameObjectFromPrefab<T>(GameObject prefab, Vector3 position);
-    }
+    
 
 }
 

@@ -22,19 +22,18 @@
 /// SOFTWARE.
 ///
 
+using UnityEngine;
+
 namespace Game
 {
     /// <summary>
-    /// Protocol describing the ability of an object to collide with another type of object.
+    /// Protocol describing the ability to get tinted by a specific color.
     /// </summary>
-    /// <typeparam name="T">The type of object we want to be able to collide with.</typeparam>
-    public interface Collisionable<T>
+    public interface ColorTintable
     {
         /// <summary>
-        /// Method called when a collision with other object takes place.
+        /// The object's tint color.
         /// </summary>
-        /// <param name="other">The object we collided with.</param>
-        void CollidedWith(T other);
+        Color TintColor { get; set; }
     }
 }
-

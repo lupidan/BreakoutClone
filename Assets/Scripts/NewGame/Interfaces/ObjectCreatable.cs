@@ -22,19 +22,15 @@
 /// SOFTWARE.
 ///
 
+using UnityEngine;
+
 namespace Game
 {
     /// <summary>
-    /// Protocol describing the ability of an object to collide with another type of object.
+    /// A protocol describing the ability of an object to create other objects.
     /// </summary>
-    /// <typeparam name="T">The type of object we want to be able to collide with.</typeparam>
-    public interface Collisionable<T>
+    public interface ObjectCreatable
     {
-        /// <summary>
-        /// Method called when a collision with other object takes place.
-        /// </summary>
-        /// <param name="other">The object we collided with.</param>
-        void CollidedWith(T other);
+        T CreateGameObjectFromPrefab<T>(GameObject prefab, Vector3 position);
     }
 }
-
