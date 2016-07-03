@@ -42,7 +42,7 @@ namespace Game
         {
             if ((block != null) && (GameController != null))
             {
-                block.Eliminate();
+                block.Eliminable.Eliminate();
                 GameController.AddPoints(block.Points);
                 if (GameController.AreAllBlocksDestroyed)
                 {

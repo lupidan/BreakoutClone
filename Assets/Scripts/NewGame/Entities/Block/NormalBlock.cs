@@ -27,10 +27,10 @@ using UnityEngine;
 namespace Game
 {
     /// <summary>
-    /// A Default block contains the default implementation of a Block.
+    /// A normal block is a standard block with no special qualities.
     /// </summary>
     [System.Serializable]
-    public class DefaultBlock : Block
+    public class NormalBlock : Block
     {
         [SerializeField]
         private int points = 100;

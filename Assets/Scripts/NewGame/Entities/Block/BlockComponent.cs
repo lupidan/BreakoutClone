@@ -27,9 +27,9 @@ using UnityEngine;
 namespace Game
 {
     /// <summary>
-    /// A block component represents a Unity GameObject component for block objects.
+    /// A NormalBlockComponent implements a component that handles a NormalBlock object.
     /// </summary>
-    public class BlockComponent : MonoBehaviour
+    public class NormalBlockComponent : MonoBehaviour
     {
         /// <summary>
         /// The GameObject tag that all Block elements should have.
@@ -39,7 +39,7 @@ namespace Game
         /// <summary>
         /// The block object for this block component.
         /// </summary>
-        public DefaultBlock block = new DefaultBlock();
+        public NormalBlock block = new NormalBlock();
 
         #region MonoBehaviour
         void Awake()
