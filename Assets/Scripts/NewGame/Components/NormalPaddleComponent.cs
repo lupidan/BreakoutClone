@@ -27,34 +27,31 @@ using UnityEngine;
 namespace Game
 {
     /// <summary>
-    /// A Paddle respresents a paddle in the game. A Paddle is able to launch the ball a certain speed and to move inside a given area.
+    /// A NormalPaddleComponent implements a component that handles a NormalPaddle object.
     /// </summary>
-    public interface Paddle : Collisionable<Ball>
+    public class NormalPaddleComponent : MonoBehaviour
     {
         /// <summary>
-        /// The object able to position the paddle on the game scene.
+        /// The paddle object for this paddle component.
         /// </summary>
-        Positionable Positionable { get; }
+        public NormalPaddle paddle = new NormalPaddle();
 
-        /// <summary>
-        /// The object able to eliminate the paddle from the game scene.
-        /// </summary>
-        Eliminable Eliminable { get; }
+        #region MonoBehaviour
+        void Awake()
+        {
+            paddle.Positionable = new GameObjectPositioner(this.gameObject);
+            paddle.Eliminable = new GameObjectEliminator(this.gameObject);
+        }
 
-        /// <summary>
-        /// The speed the ball is bounced up when colliding with the paddle, or when it's first launched.
-        /// </summary>
-        float BounceSpeed { get; }
-
-        /// <summary>
-        /// The correct factor for the direction vector to use when the ball needs to bounce.
-        /// </summary>
-        float BounceCorrectFactor { get; }
-
-        /// <summary>
-        /// The move area this component's GameObject is allowed to move in.
-        /// </summary>
-        Rect MoveArea { get; }
+        void OnCollisionEnter2D(Collision2D collision)
+        {
+            if (collision.gameObject.tag == NormalBallComponent.Tag)
+            {
+                NormalBallComponent ballComponent = collision.gameObject.GetComponent<NormalBallComponent>();
+                paddle.CollidedWith(ballComponent.ball);
+            }
+        }
+        #endregion
     }
 }
 

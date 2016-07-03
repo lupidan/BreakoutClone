@@ -26,35 +26,32 @@ using UnityEngine;
 
 namespace Game
 {
-    /// <summary>
-    /// A Paddle respresents a paddle in the game. A Paddle is able to launch the ball a certain speed and to move inside a given area.
-    /// </summary>
-    public interface Paddle : Collisionable<Ball>
+    [System.Serializable]
+    public class NormalPaddle : Paddle
     {
-        /// <summary>
-        /// The object able to position the paddle on the game scene.
-        /// </summary>
-        Positionable Positionable { get; }
+        [SerializeField]
+        private float bounceSpeed = 7.0f;
+        [SerializeField]
+        private Rect moveArea = new Rect(-5.0f, -5.0f, 10.0f, 10.0f);
+        [SerializeField]
+        private float bounceCorrectFactor = 0.4f;
 
-        /// <summary>
-        /// The object able to eliminate the paddle from the game scene.
-        /// </summary>
-        Eliminable Eliminable { get; }
+        #region Paddle implementation
+        public Positionable Positionable { get; set; }
+        public Eliminable Eliminable { get; set; }
+        public float BounceSpeed { get { return bounceSpeed; } }
+        public float BounceCorrectFactor { get { return bounceCorrectFactor; } }
+        public Rect MoveArea { get { return moveArea; } }
 
-        /// <summary>
-        /// The speed the ball is bounced up when colliding with the paddle, or when it's first launched.
-        /// </summary>
-        float BounceSpeed { get; }
+        public void CollidedWith(Ball ball)
+        {
+            //TODO: Calcular angulo y lanzar
+            ball.Launch(45.0f, BounceSpeed);
+        }
 
-        /// <summary>
-        /// The correct factor for the direction vector to use when the ball needs to bounce.
-        /// </summary>
-        float BounceCorrectFactor { get; }
-
-        /// <summary>
-        /// The move area this component's GameObject is allowed to move in.
-        /// </summary>
-        Rect MoveArea { get; }
+        
+        //TODO: Movign
+        #endregion
     }
 }
 
