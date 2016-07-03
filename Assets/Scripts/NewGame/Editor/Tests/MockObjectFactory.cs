@@ -53,6 +53,12 @@ namespace Game {
             block.Points.Returns(points);
             return block;
         }
+
+        static public Ball MakeBallMock()
+        {
+            Ball ball = Substitute.For<Ball>();
+            return ball;
+        }
     }
 }
 

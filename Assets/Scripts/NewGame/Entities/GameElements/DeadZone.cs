@@ -37,7 +37,7 @@ namespace Game
         #region Collisionable implementation
         public void CollidedWith(Ball ball)
         {
-            if (ball != null)
+            if (ball != null && ball.Eliminable != null)
             {
                 ball.Eliminable.Eliminate();
             }
