@@ -33,7 +33,6 @@ namespace Game
     {
         private NormalBall ball;
         
-
         [SetUp]
         public void SetUp()
         {
