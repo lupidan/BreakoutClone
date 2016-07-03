@@ -55,6 +55,12 @@ namespace Game
         /// The move area this component's GameObject is allowed to move in.
         /// </summary>
         Rect MoveArea { get; }
+
+        /// <summary>
+        /// Updates the paddle position according to a deltaTime value.
+        /// </summary>
+        /// <param name="deltaTime">The delta time value to use for the position update.</param>
+        void UpdatePosition(float deltaTime);
     }
 }
 

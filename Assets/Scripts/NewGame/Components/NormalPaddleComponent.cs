@@ -43,6 +43,11 @@ namespace Game
             paddle.Eliminable = new GameObjectEliminator(this.gameObject);
         }
 
+        void Update()
+        {
+            paddle.UpdatePosition(Time.deltaTime);
+        }
+
         void OnCollisionEnter2D(Collision2D collision)
         {
             if (collision.gameObject.tag == NormalBallComponent.Tag)

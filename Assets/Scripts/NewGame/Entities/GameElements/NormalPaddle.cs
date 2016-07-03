@@ -29,28 +29,42 @@ namespace Game
     [System.Serializable]
     public class NormalPaddle : Paddle
     {
-        [SerializeField]
-        private float bounceSpeed = 7.0f;
-        [SerializeField]
-        private Rect moveArea = new Rect(-5.0f, -5.0f, 10.0f, 10.0f);
-        [SerializeField]
-        private float bounceCorrectFactor = 0.4f;
 
         #region Paddle implementation
         public Positionable Positionable { get; set; }
         public Eliminable Eliminable { get; set; }
-        public float BounceSpeed { get { return bounceSpeed; } }
-        public float BounceCorrectFactor { get { return bounceCorrectFactor; } }
-        public Rect MoveArea { get { return moveArea; } }
+        public float BounceSpeed { get; set; }
+        public float BounceCorrectFactor { get; set; }
+        public Rect MoveArea { get; set; }
 
         public void CollidedWith(Ball ball)
         {
-            //TODO: Calcular angulo y lanzar
-            ball.Launch(45.0f, BounceSpeed);
+            if (Positionable != null &&
+                ball != null && ball.Positionable != null && ball.Speedable != null)
+            {
+                float bounceCorrectFactor = BounceCorrectFactor;
+                if (bounceCorrectFactor < 0.0f)
+                {
+                    bounceCorrectFactor = 0.0f;
+                }
+
+                float bounceSpeed = BounceSpeed;
+                if (bounceSpeed < 0.0f)
+                {
+                    bounceSpeed = 0.0f;
+                }
+
+                Vector3 bounceDirection = ball.Positionable.Position - Positionable.Position;
+                bounceDirection.x = bounceDirection.x * bounceCorrectFactor;
+                bounceDirection.z = 0.0f;
+                ball.Speedable.Velocity = bounceDirection.normalized * bounceSpeed;
+            }
         }
 
-        
-        //TODO: Movign
+        public void UpdatePosition(float deltaTime)
+        {
+            //Do stuff here
+        }
         #endregion
     }
 }
