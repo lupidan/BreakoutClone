@@ -64,7 +64,6 @@ namespace Game
         }
         #endregion
 
-
         #region XPosition Tests
         [Test]
         public void TestXPositionSetterOnlyChangesGameObjectTransformXPosition()
@@ -84,7 +83,7 @@ namespace Game
         }
         #endregion
 
-        #region YPosition
+        #region YPosition Tests
         [Test]
         public void TestYPositionSetterOnlyChangesGameObjectTransformYPosition()
         {
@@ -103,7 +102,7 @@ namespace Game
         }
         #endregion
 
-        #region YPosition
+        #region ZPosition Tests
         [Test]
         public void TestZPositionSetterOnlyChangesGameObjectTransformZPosition()
         {
