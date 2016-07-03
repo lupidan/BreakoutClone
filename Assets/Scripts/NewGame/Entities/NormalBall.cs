@@ -32,12 +32,16 @@ namespace Game
     [System.Serializable]
     public class NormalBall : Ball
     {
+        /// <summary>
+        /// The game controller to communicate with.
+        /// </summary>
+        GameController gameController;
+
         [SerializeField]
         private bool isOnPlay = false;
 
         #region Ball implementation
         public bool IsOnPlay { get { return isOnPlay; } }
-        public GameController GameController { get; set; }
         public Positionable Positionable { get; set; }
         public Eliminable Eliminable { get; set; }
         public Speedable Speedable { get; set; }
@@ -64,13 +68,13 @@ namespace Game
 
         public void CollidedWithBlock(Block block)
         {
-            if ((block != null) && (GameController != null))
+            if ((block != null) && (gameController != null))
             {
                 block.Eliminable.Eliminate();
-                GameController.AddPoints(block.Points);
-                if (GameController.AreAllBlocksDestroyed)
+                gameController.AddPoints(block.Points);
+                if (gameController.AreAllBlocksDestroyed)
                 {
-                    GameController.GoToNextLevel();
+                    gameController.GoToNextLevel();
                 }
             }
         }

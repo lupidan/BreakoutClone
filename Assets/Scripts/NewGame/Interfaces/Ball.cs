@@ -30,11 +30,6 @@ namespace Game
     public interface Ball
     {
         /// <summary>
-        /// The game controller to communicate with.
-        /// </summary>
-        GameController GameController { get; }
-
-        /// <summary>
         /// The object able to position the ball on the game scene.
         /// </summary>
         Positionable Positionable { get; }

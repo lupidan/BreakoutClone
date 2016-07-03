@@ -2,6 +2,7 @@
 
 namespace Game
 {
+
     /// <summary>
     /// A Positionable object can be set a Position in the world.
     /// </summary>
