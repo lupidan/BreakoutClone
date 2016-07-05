@@ -27,25 +27,43 @@ using UnityEngine;
 namespace Game
 {
     [System.Serializable]
+    
     public class NormalPaddle : Paddle
     {
+        private PlayerInput playerInput;
+        private Positionable positionable;
+        private Eliminable eliminable;
+
+        [SerializeField]
+        private float paddleSpeed = 7.0f;
+
+        [SerializeField]
+        private float bounceSpeed = 10.0f;
+
+        [SerializeField]
+        private float bounceCorrectFactor = 0.4f;
+
+        [SerializeField]
+        private Rect moveArea = new Rect(-5.0f, -5.0f, 10.0f, 10.0f);
 
         #region Paddle implementation
-        public Positionable Positionable { get; set; }
-        public Eliminable Eliminable { get; set; }
-        public float BounceSpeed { get; set; }
-        public float BounceCorrectFactor { get; set; }
-        public Rect MoveArea { get; set; }
+        public PlayerInput PlayerInput      { get { return playerInput; }           set { playerInput = value; } }
+        public Positionable Positionable    { get { return positionable; }          set { positionable = value; } }
+        public Eliminable Eliminable        { get { return eliminable; }            set { eliminable = value; } }
+        public float PaddleSpeed            { get { return paddleSpeed; }           set { paddleSpeed = value; } }
+        public float BounceSpeed            { get { return bounceSpeed; }           set { bounceSpeed = value; } }
+        public float BounceCorrectFactor    { get { return bounceCorrectFactor; }   set { bounceCorrectFactor = value; } }
+        public Rect MoveArea                { get { return moveArea; }              set { moveArea = value; } }
 
         public void CollidedWith(Ball ball)
         {
-            if (Positionable != null &&
+            if (positionable != null &&
                 ball != null && ball.Positionable != null && ball.Speedable != null)
             {
-                float bounceCorrectFactor = BounceCorrectFactor;
-                if (bounceCorrectFactor < 0.0f)
+                float correctFactor = bounceCorrectFactor;
+                if (correctFactor < 0.0f)
                 {
-                    bounceCorrectFactor = 0.0f;
+                    correctFactor = 0.0f;
                 }
 
                 float bounceSpeed = BounceSpeed;
@@ -54,8 +72,8 @@ namespace Game
                     bounceSpeed = 0.0f;
                 }
 
-                Vector3 bounceDirection = ball.Positionable.Position - Positionable.Position;
-                bounceDirection.x = bounceDirection.x * bounceCorrectFactor;
+                Vector3 bounceDirection = ball.Positionable.Position - positionable.Position;
+                bounceDirection.x = bounceDirection.x * correctFactor;
                 bounceDirection.z = 0.0f;
                 ball.Speedable.Velocity = bounceDirection.normalized * bounceSpeed;
             }
@@ -63,7 +81,15 @@ namespace Game
 
         public void UpdatePosition(float deltaTime)
         {
-            //Do stuff here
+            if (playerInput.HasValidInput)
+            {
+                float xAxis = playerInput.XAxis;
+                Vector3 position = positionable.Position;
+                position.x += xAxis * paddleSpeed * deltaTime;
+                position = moveArea.ClampPosition(position);
+                positionable.Position = position;
+            }
+            
         }
         #endregion
     }

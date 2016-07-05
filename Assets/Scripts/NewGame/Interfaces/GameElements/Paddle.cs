@@ -32,29 +32,39 @@ namespace Game
     public interface Paddle : Collisionable<Ball>
     {
         /// <summary>
+        /// The player input object the paddle will use to move around.
+        /// </summary>
+        PlayerInput PlayerInput { get; set; }
+
+        /// <summary>
         /// The object able to position the paddle on the game scene.
         /// </summary>
-        Positionable Positionable { get; }
+        Positionable Positionable { get; set; }
 
         /// <summary>
         /// The object able to eliminate the paddle from the game scene.
         /// </summary>
-        Eliminable Eliminable { get; }
+        Eliminable Eliminable { get; set; }
+
+        /// <summary>
+        /// The paddle speed in units per second.
+        /// </summary>
+        float PaddleSpeed { get; set; }
 
         /// <summary>
         /// The speed the ball is bounced up when colliding with the paddle, or when it's first launched.
         /// </summary>
-        float BounceSpeed { get; }
+        float BounceSpeed { get; set; }
 
         /// <summary>
         /// The correct factor for the direction vector to use when the ball needs to bounce.
         /// </summary>
-        float BounceCorrectFactor { get; }
+        float BounceCorrectFactor { get; set; }
 
         /// <summary>
         /// The move area this component's GameObject is allowed to move in.
         /// </summary>
-        Rect MoveArea { get; }
+        Rect MoveArea { get; set; }
 
         /// <summary>
         /// Updates the paddle position according to a deltaTime value.

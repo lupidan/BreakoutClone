@@ -27,9 +27,8 @@ namespace Game
     /// <summary>
     /// A PlayerInput interface defines a behaviour to be used by Input classes in order to interact with the game.
     /// </summary>
-    interface PlayerInput
+    public interface PlayerInput
     {
-
         /// <summary>
         /// Returns the XAxis value
         /// </summary>

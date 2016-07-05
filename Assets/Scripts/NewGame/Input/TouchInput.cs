@@ -32,6 +32,7 @@ namespace Game
     /// </summary>
     public class TouchInput : PlayerInput
     {
+        #region PlayerInput implementation
         public float XAxis
         {
             get
@@ -83,6 +84,7 @@ namespace Game
                 return EventSystem.current.currentSelectedGameObject == null;
             }
         }
+        #endregion
     }
 }
 
