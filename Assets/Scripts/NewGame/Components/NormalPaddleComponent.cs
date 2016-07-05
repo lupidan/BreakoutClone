@@ -41,7 +41,7 @@ namespace Game
         {
             paddle.Positionable = new GameObjectPositioner(this.gameObject);
             paddle.Eliminable = new GameObjectEliminator(this.gameObject);
-            paddle.PlayerInput = new KeyboardInput();
+            paddle.playerInput = new KeyboardInput();
         }
 
         void Update()

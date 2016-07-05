@@ -30,7 +30,11 @@ namespace Game
     
     public class NormalPaddle : Paddle
     {
-        private PlayerInput playerInput;
+        /// <summary>
+        /// Player input to be used by this paddle.
+        /// </summary>
+        public PlayerInput playerInput;
+
         private Positionable positionable;
         private Eliminable eliminable;
 
@@ -47,7 +51,6 @@ namespace Game
         private Rect moveArea = new Rect(-5.0f, -5.0f, 10.0f, 10.0f);
 
         #region Paddle implementation
-        public PlayerInput PlayerInput      { get { return playerInput; }           set { playerInput = value; } }
         public Positionable Positionable    { get { return positionable; }          set { positionable = value; } }
         public Eliminable Eliminable        { get { return eliminable; }            set { eliminable = value; } }
         public float PaddleSpeed            { get { return paddleSpeed; }           set { paddleSpeed = value; } }

@@ -33,18 +33,22 @@ namespace Game
     public class NormalBall : Ball
     {
         /// <summary>
-        /// The game controller to communicate with.
+        /// Game controller to communicate with.
         /// </summary>
         public GameController gameController;
+
+        private Positionable positionable;
+        private Eliminable eliminable;
+        private Speedable speedable;
 
         [SerializeField]
         private bool isOnPlay = false;
 
         #region Ball implementation
-        public bool IsOnPlay { get { return isOnPlay; } }
-        public Positionable Positionable { get; set; }
-        public Eliminable Eliminable { get; set; }
-        public Speedable Speedable { get; set; }
+        public Positionable Positionable        { get { return positionable; }      set { positionable = value; } }
+        public Eliminable Eliminable            { get { return eliminable; }        set { eliminable = value; } }
+        public Speedable Speedable              { get { return speedable; }         set { speedable = value; } }
+        public bool IsOnPlay                    { get { return isOnPlay; } }
 
         public void Reset()
         {

@@ -32,22 +32,22 @@ namespace Game
         /// <summary>
         /// The object able to change the position of the block.
         /// </summary>
-        Positionable Positionable { get; }
+        Positionable Positionable { get; set; }
 
         /// <summary>
         /// The object able to change the tint color of the block.
         /// </summary>
-        ColorTintable ColorTintable { get; }
+        ColorTintable ColorTintable { get; set; }
 
         /// <summary>
         /// The object able to destroy game objects.
         /// </summary>
-        Eliminable Eliminable { get; }
+        Eliminable Eliminable { get; set; }
 
         /// <summary>
         /// The number of points provided by the block when eliminated.
         /// </summary>
-        int Points { get; }
+        int Points { get; set; }
     }
 }
 

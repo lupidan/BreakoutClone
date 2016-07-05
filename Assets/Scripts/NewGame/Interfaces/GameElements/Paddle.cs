@@ -32,11 +32,6 @@ namespace Game
     public interface Paddle : Collisionable<Ball>
     {
         /// <summary>
-        /// The player input object the paddle will use to move around.
-        /// </summary>
-        PlayerInput PlayerInput { get; set; }
-
-        /// <summary>
         /// The object able to position the paddle on the game scene.
         /// </summary>
         Positionable Positionable { get; set; }

@@ -32,14 +32,18 @@ namespace Game
     [System.Serializable]
     public class NormalBlock : Block
     {
+        private Positionable positionable;
+        private ColorTintable colorTintable;
+        private Eliminable eliminable;
+
         [SerializeField]
         private int points = 100;
 
         #region Block implementation
-        public int Points { get { return points; } }
-        public Positionable Positionable { get; set; }
-        public ColorTintable ColorTintable { get; set; }
-        public Eliminable Eliminable { get; set; }
+        public Positionable Positionable { get { return positionable; } set { positionable = value; } }
+        public ColorTintable ColorTintable { get { return colorTintable; } set { colorTintable = value; } }
+        public Eliminable Eliminable { get { return eliminable; } set { eliminable = value; } }
+        public int Points { get { return points; } set { points = value; } }
         #endregion
 
     }

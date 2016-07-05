@@ -33,17 +33,17 @@ namespace Game
         /// <summary>
         /// The object able to position the ball on the game scene.
         /// </summary>
-        Positionable Positionable { get; }
+        Positionable Positionable { get; set; }
 
         /// <summary>
         /// The object able to eliminate the ball from the game scene.
         /// </summary>
-        Eliminable Eliminable { get; }
+        Eliminable Eliminable { get; set;  }
 
         /// <summary>
         /// The object able to apply speed to the ball in the game scene.
         /// </summary>
-        Speedable Speedable { get; }
+        Speedable Speedable { get; set;  }
 
         /// <summary>
         /// Whether the ball is being played or not.
