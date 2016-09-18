@@ -22,34 +22,23 @@
 /// SOFTWARE.
 ///
 
-namespace Game
-{
-    /// <summary>
-    /// A standard implementation of a DeadZone. When a collision is detected, it eliminates the ball and substracts a life.
-    /// </summary>
-    [System.Serializable]
-    public class DeadZone : Collisionable<Ball> {
+using UnityEngine;
 
-        /// <summary>
-        /// The game controller this dead zone has to communicate with.
-        /// </summary>
-        public GameController gameController;
+namespace Game {
 
-        #region Collisionable implementation
-        public void CollidedWith(Ball ball)
-        {
-            if (ball != null && ball.Eliminable != null)
-            {
-                ball.Eliminable.Eliminate();
-            }
+	/// <summary>
+	/// A Default Object creator creates instances of prefabs instead of reusing them if needed
+	/// </summary>
+	public class DefaultObjectCreator : ObjectCreatable {
 
-            if (gameController != null)
-            {
-                gameController.SubstractLife();
-            }
-        }
-        #endregion
+		#region ObjectCreatable implementation
+		public T CreateGameObjectFromPrefab<T>(GameObject prefab, Vector3 position)
+		{
+			GameObject gameObject = GameObject.Instantiate(prefab, position);
+			return gameObject.GetComponent<T>();
+		}
+		#endregion
 
-    }
+	}
+
 }
-

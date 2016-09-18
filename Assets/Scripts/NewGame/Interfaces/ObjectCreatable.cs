@@ -31,6 +31,13 @@ namespace Game
     /// </summary>
     public interface ObjectCreatable
     {
+	    /// <summary>
+	    /// Creates a game object from a specific prefab element, at a specific position, and returns the included component
+	    /// </summary>
+	    /// <returns>The game object from prefab.</returns>
+	    /// <param name="prefab">The prefab to instantiate.</param>
+	    /// <param name="position">The position where we want to instantiate the prefab.</param>
+	    /// <typeparam name="T">The type of component we would like to retrieve.</typeparam>
         T CreateGameObjectFromPrefab<T>(GameObject prefab, Vector3 position);
     }
 }
