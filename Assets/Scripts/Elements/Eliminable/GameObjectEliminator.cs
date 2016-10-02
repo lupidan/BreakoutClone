@@ -24,21 +24,34 @@
 
 using UnityEngine;
 
-namespace Game {
+namespace Game
+{
+    /// <summary>
+    /// A GameObjectEliminator instance implements the Eliminable protocol to destroy a GameObject.
+    /// </summary>
+    public class GameObjectEliminator : Eliminable
+    {
+        private GameObject gameObject;
 
-	/// <summary>
-	/// A Default Object creator creates instances of prefabs instead of reusing them if needed
-	/// </summary>
-	public class DefaultObjectCreator : ObjectCreatable {
+        /// <summary>
+        /// Creates a GameObjectEliminator for a specific unity GameObject
+        /// </summary>
+        /// <param name="gameObject"></param>
+        public GameObjectEliminator(GameObject gameObject)
+        {
+            this.gameObject = gameObject;
+        }
 
-		#region ObjectCreatable implementation
-		public T CreateGameObjectFromPrefab<T>(GameObject prefab, Vector3 position)
-		{
-			GameObject gameObject = GameObject.Instantiate(prefab, position, Quaternion.identity) as GameObject;
-			return gameObject.GetComponent<T>();
-		}
-		#endregion
-
-	}
-
+        #region Eliminable implementation
+        public void Eliminate()
+        {
+            EntityFactory entityFactory = Toolbox.Instance.entityFactory;
+            if (entityFactory != null && gameObject != null)
+            {
+                entityFactory.EliminateGameObject(gameObject);
+            }
+        }
+        #endregion
+    }
 }
+

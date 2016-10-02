@@ -30,8 +30,9 @@ namespace Game
 	/// <summary>
 	/// The default implementation of an entity factory
 	/// </summary>
-    public class DefaultEntityFactory : EntityFactory
+    public class DefaultEntityFactory : MonoBehaviour, EntityFactory
     {
+
         #region Properties
         /// <summary>
         /// Ball prefab to instantiate when creating a Ball.
@@ -60,21 +61,22 @@ namespace Game
 
         private Dictionary<char, BlockInfo> blockInfoDictionary = new Dictionary<char, BlockInfo>();
 
-        /// <summary>
-        /// The instance able to create objects
-        /// </summary>
-        public ObjectCreatable objectCreatable;
+        private GameObjectPoolManager poolManager = new GameObjectPoolManager();
         #endregion
 
         #region EntityFactory implementation
         public Paddle CreatePaddle(Vector3 position)
         {
-            return objectCreatable.CreateGameObjectFromPrefab<Paddle>(paddlePrefab, position);
+            GameObject gameObject = poolManager.SpawnGameObject(paddlePrefab);
+            gameObject.transform.position = position;
+            return gameObject.GetComponent<NormalPaddleComponent>().paddle;
         }
 
         public Ball CreateBall(Vector3 position)
         {
-            return objectCreatable.CreateGameObjectFromPrefab<Ball>(paddlePrefab, position);
+            GameObject gameObject = poolManager.SpawnGameObject(ballPrefab);
+            gameObject.transform.position = position;
+            return gameObject.GetComponent<NormalBallComponent>().ball;
         }
 
         public BlockInfo BlockInfoForCharID(char charID)
@@ -86,10 +88,16 @@ namespace Game
 
         public Block CreateBlock(BlockInfo blockInfo, Vector3 position)
         {
-            return objectCreatable.CreateGameObjectFromPrefab<Block>(paddlePrefab, position);
+            GameObject gameObject = poolManager.SpawnGameObject(greyBlockPrefab);
+            gameObject.transform.position = position;
+            return gameObject.GetComponent<NormalBlockComponent>().block;
+        }
+
+        public void EliminateGameObject(GameObject gameObject)
+        {
+            poolManager.RecycleGameObject(gameObject);
         }
         #endregion
-
 
     }
 }

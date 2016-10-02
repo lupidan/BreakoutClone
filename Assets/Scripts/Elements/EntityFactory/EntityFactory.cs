@@ -78,6 +78,12 @@ namespace Game
         /// <param name="position">The position of the block.</param>
         /// <returns>The Block component of the created Block component.</returns>
         Block CreateBlock(BlockInfo blockInfo, Vector3 position);
+
+        /// <summary>
+        /// Eliminates a specific game object on screen.
+        /// </summary>
+        /// <param name="gameObject">The game object to eliminate.</param>
+        void EliminateGameObject(GameObject gameObject);
     }
 }
 
