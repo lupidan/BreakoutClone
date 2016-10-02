@@ -29,7 +29,7 @@ namespace Game
     /// <summary>
     /// A Normal Ball component represents a Unity GameObject that manages a normal ball instance.
     /// </summary>
-    public class NormalBallComponent : MonoBehaviour
+    public class NormalBallComponent : MonoBehaviour, PoolableComponent
     {
         /// <summary>
         /// The GameObject tag that all Ball elements should have.
