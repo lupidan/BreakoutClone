@@ -40,7 +40,7 @@ namespace Game
         #region MonoBehaviour
         void Awake()
         {
-            deadZone.gameController = null;
+            deadZone.gameController = Toolbox.Instance.gameController;
         }
 
         void OnTriggerEnter2D(Collider2D collider)
