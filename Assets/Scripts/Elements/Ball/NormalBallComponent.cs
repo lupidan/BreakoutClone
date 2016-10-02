@@ -47,6 +47,7 @@ namespace Game
             ball.Positionable = new GameObjectPositioner(this.gameObject);
             ball.Speedable = new Rigidbody2DSpeeder(this.gameObject);
             ball.Eliminable = new GameObjectEliminator(this.gameObject);
+            ball.gameController = Toolbox.GameController;
         }
 
         void OnCollisionEnter2D(Collision2D collision)
