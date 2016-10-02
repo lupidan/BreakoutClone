@@ -27,7 +27,7 @@ using System.Collections;
 
 namespace Game {
 
-	public class DefaultGameController : MonoBehaviour {
+	public class DefaultGameController : MonoBehaviour, GameController {
 
 		private int score = 0;
 		private int lives = 0;
@@ -49,12 +49,13 @@ namespace Game {
 	    }
 
 		#region GameController implementation
-		int Score { get { return score; } }
-		bool AreAllBlocksDestroyed { get { return false; } }
-    	event GameControlEvent OnScoreChanged;
-	    event GameControlEvent OnLivesChanged;
-		event GameControlEvent OnStatusChanged;
-		event GameControlEvent OnLevelChanged;
+		public int Score { get { return score; } }
+		public int Lives { get { return lives; } }
+		public bool AreAllBlocksDestroyed { get { return false; } }
+		public event GameControlEvent OnScoreChanged;
+		public event GameControlEvent OnLivesChanged;
+		public event GameControlEvent OnStatusChanged;
+		public event GameControlEvent OnLevelChanged;
 
 		public void CreateLevel(string levelData)
 		{

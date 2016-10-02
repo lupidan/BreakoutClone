@@ -22,31 +22,32 @@
 /// SOFTWARE.
 ///
 
-/// <summary>
-/// A PlayerInput interface defines a behaviour to be used by Input classes in order to interact with the game.
-/// </summary>
-public interface PlayerInput {
-
+namespace Game
+{
     /// <summary>
-    /// Returns true when the Launch Button was pressed.
+    /// A PlayerInput interface defines a behaviour to be used by Input classes in order to interact with the game.
     /// </summary>
-    bool LaunchButtonPressed { get; }
+    public interface PlayerInput
+    {
+        /// <summary>
+        /// Returns the XAxis value
+        /// </summary>
+        float XAxis { get; }
 
-    /// <summary>
-    /// Returns true when the Pause Button was pressed.
-    /// </summary>
-    bool PauseButtonPressed { get; }
+        /// <summary>
+        /// Returns true when the Launch Button was pressed.
+        /// </summary>
+        bool LaunchButtonPressed { get; }
 
-    /// <summary>
-    /// Whether the game can be updated with this input.
-    /// </summary>
-    bool CanUpdateGame { get; }
+        /// <summary>
+        /// Returns true when the Pause Button was pressed.
+        /// </summary>
+        bool PauseButtonPressed { get; }
 
-    /// <summary>
-    /// Updates an horizontal position by reading the input.
-    /// </summary>
-    /// <param name="currentHorizontalPosition">The current X position.</param>
-    /// <returns>The new X position after reading the input.</returns>
-    float UpdateXPosition(float currentXPosition);
-	
+        /// <summary>
+        /// Whether this player input has a valid input.
+        /// </summary>
+        bool HasValidInput { get; }
+    }
 }
+

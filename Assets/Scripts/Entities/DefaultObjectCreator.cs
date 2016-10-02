@@ -34,7 +34,7 @@ namespace Game {
 		#region ObjectCreatable implementation
 		public T CreateGameObjectFromPrefab<T>(GameObject prefab, Vector3 position)
 		{
-			GameObject gameObject = GameObject.Instantiate(prefab, position);
+			GameObject gameObject = GameObject.Instantiate(prefab, position, Quaternion.identity) as GameObject;
 			return gameObject.GetComponent<T>();
 		}
 		#endregion

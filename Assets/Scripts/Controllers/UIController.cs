@@ -62,19 +62,19 @@ public class UIController : MonoBehaviour {
             gameTouchGUI = null;
         }
 
-        Toolbox.GameController.OnStatusChanged += GameStatusChanged;
+//        Toolbox.GameController.OnStatusChanged += GameStatusChanged;
     }
 
-    private void GameStatusChanged(GameController gameController)
-    {
-        mainMenuGUI.SetActive(gameController.State == GameController.Status.MainMenu);
-        gameHUD.SetActive(gameController.State != GameController.Status.MainMenu);
-        if (gameTouchGUI != null)
-        {
-            gameTouchGUI.SetActive(gameController.State == GameController.Status.InGame);
-        }
-        gameOverGUI.SetActive(gameController.State == GameController.Status.GameOver);
-        pauseMenuGUI.SetActive(gameController.State == GameController.Status.Paused);
-    }
+//    private void GameStatusChanged(GameController gameController)
+//    {
+//        mainMenuGUI.SetActive(gameController.State == GameController.Status.MainMenu);
+//        gameHUD.SetActive(gameController.State != GameController.Status.MainMenu);
+//        if (gameTouchGUI != null)
+//        {
+//            gameTouchGUI.SetActive(gameController.State == GameController.Status.InGame);
+//        }
+//        gameOverGUI.SetActive(gameController.State == GameController.Status.GameOver);
+//        pauseMenuGUI.SetActive(gameController.State == GameController.Status.Paused);
+//    }
 
 }
