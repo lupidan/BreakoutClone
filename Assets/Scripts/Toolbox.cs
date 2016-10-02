@@ -5,7 +5,6 @@ namespace Game
 {
     public class Toolbox : MonoBehaviour
     {
-
         public static Toolbox _instance = null;
 
         public static Toolbox Instance
@@ -20,9 +19,14 @@ namespace Game
             }
         }
 
-        public GameController gameController = null;
-        public PlayerInput playerInput = null;
-        public EntityFactory entityFactory = null;
+        public static GameController GameController { get { return Instance.gameController; } }
+        public static EntityFactory EntityFactory { get { return Instance.entityFactory; } }
+
+        [SerializeField]
+        private DefaultGameController gameController = null;
+
+        [SerializeField]
+        private DefaultEntityFactory entityFactory = null;
 
     }
 }

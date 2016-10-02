@@ -2679,6 +2679,9 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 2037449567}
+  - 114: {fileID: 2037449571}
+  - 114: {fileID: 2037449570}
+  - 114: {fileID: 2037449569}
   - 114: {fileID: 2037449568}
   m_Layer: 0
   m_Name: Toolbox
@@ -2716,6 +2719,46 @@ MonoBehaviour:
   gameTouchGUI: {fileID: 667143690}
   gameOverGUI: {fileID: 405647955}
   pauseMenuGUI: {fileID: 875428148}
+--- !u!114 &2037449569
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2037449566}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2585e010f81b56447ab68c47c5c104e1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ballPrefab: {fileID: 191454, guid: f758cceabbc31714cabb495c78abe3d3, type: 2}
+  paddlePrefab: {fileID: 108420, guid: 9bf48141e23ae614cb82360116a8175a, type: 2}
+  greyBlockPrefab: {fileID: 104988, guid: c56b6519fa9af094a8655a901760d3eb, type: 2}
+  blockSize: {x: 0.64, y: 0.32}
+  blocksInfo: []
+--- !u!114 &2037449570
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2037449566}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1a60ab66e60034cf9a77307e22f07894, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &2037449571
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2037449566}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a0740bebda095cb4690bb04059063e79, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gameController: {fileID: 2037449570}
+  entityFactory: {fileID: 2037449569}
 --- !u!1 &2044706404
 GameObject:
   m_ObjectHideFlags: 0

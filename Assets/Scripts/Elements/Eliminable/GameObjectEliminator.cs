@@ -45,7 +45,7 @@ namespace Game
         #region Eliminable implementation
         public void Eliminate()
         {
-            EntityFactory entityFactory = Toolbox.Instance.entityFactory;
+            EntityFactory entityFactory = Toolbox.EntityFactory;
             if (entityFactory != null && gameObject != null)
             {
                 entityFactory.EliminateGameObject(gameObject);
